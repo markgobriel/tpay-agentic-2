@@ -25,7 +25,7 @@ test("creates a routine through the HTTP boundary with a domain-calculated next 
   assert.deepEqual(await response.json(), {
     id: (await fetch(`http://localhost:${port}/api/routines`).then((r) => r.json()))[0].id,
     name: "Clean fridge shelf", area: "Kitchen", createdOn: "2026-01-30",
-    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due", latestCompletion: null
+    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due", latestCompletion: null, completionHistory: []
   });
 });
 
@@ -58,6 +58,7 @@ test("records a completion against the local boundary date and returns updated h
   const tomorrow = new Date(`${localDate}T00:00:00.000Z`);
   tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
   assert.deepEqual(result.completions, [localDate]);
+  assert.deepEqual(result.completionHistory, [localDate]);
   assert.equal(result.latestCompletion, localDate);
   assert.equal(result.status, "upcoming");
   assert.equal(result.nextDue, tomorrow.toISOString().slice(0, 10));

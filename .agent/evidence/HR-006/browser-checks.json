@@ -1,0 +1,20 @@
+{
+  "task": "HR-006",
+  "date": "2026-08-17",
+  "desktop": {
+    "viewport": "default desktop",
+    "screenshot": ".agent/evidence/HR-006/desktop-completion-history.png",
+    "keyboardFlow": "Tab focused Mark complete; Enter completed the due routine. After the rerender, Tab focused Show completion history and Enter expanded it.",
+    "visibleValues": ["Review hallway mat", "Last completed 2026-08-17", "Completed 2026-08-17", "Hide completion history"]
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "screenshot": ".agent/evidence/HR-006/mobile-completion-history-390x844.png",
+    "visibleValues": ["Review hallway mat", "Completed 2026-08-17", "Hide completion history"]
+  },
+  "console": "0 errors and 0 warnings after the completion-history flow",
+  "network": [
+    "POST /api/routines/54948e91-3e28-414b-8963-d1713128f31c/completions -> 201",
+    "GET /api/routines -> 200"
+  ]
+}

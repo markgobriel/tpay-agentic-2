@@ -1,12 +1,12 @@
 {
   "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-17: npm run validate passed for HR-005 routine editing (format, typecheck, build, architecture, 22 tests).",
+  "lastValidation": "2026-08-17: npm run validate passed for HR-006 completion history (format, typecheck, build, architecture, 22 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-17T12:57:32.399Z"
+    "recordedAt": "2026-08-17T13:59:57Z"
   },
-  "lastVerifierVerdict": "HR-005 PASS: domain-owned edit/recalculation, immutable history coverage, acceptance tests, and desktop/mobile browser evidence verified",
+  "lastVerifierVerdict": "HR-006 PASS: domain-owned newest-first immutable history, accessible controls, acceptance tests, and desktop/mobile browser evidence verified",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
@@ -15,7 +15,8 @@
     "HR-002",
     "HR-003",
     "HR-004",
-    "HR-005"
+    "HR-005",
+    "HR-006"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {

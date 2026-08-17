@@ -100,11 +100,12 @@ export function updateRoutineDetails(routine: Routine, details: RoutineDetails):
   return updated;
 }
 
-export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; latestCompletion: string | null } {
+export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; latestCompletion: string | null; completionHistory: readonly string[] } {
   return {
     ...routine,
     nextDue: nextDueDate(routine),
     status: dueStatus(routine, today),
-    latestCompletion: routine.completions.length ? latestCompletion(routine) : null
+    latestCompletion: routine.completions.length ? latestCompletion(routine) : null,
+    completionHistory: [...routine.completions].sort().reverse()
   };
 }

@@ -44,6 +44,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["User can edit a routine's name, area, and supported schedule from its card", "Editing a schedule recalculates future due state while preserving immutable completion history", "Desktop and mobile keyboard flows visibly confirm the saved edits without console or network failures"],
       "notes": "Plan: add a domain-owned edit operation that validates replacement details while retaining completions; expose it through a narrow PATCH boundary; add a compact, keyboard-operable edit form to each routine card; cover domain/API preservation and recalculation rules; then capture desktop/mobile browser evidence. No dependency added. Completed 2026-08-17: `updateRoutineDetails` validates replacement name, area, and schedule in the domain while retaining immutable completions; PATCH exposes it, and each card provides an edit form. Acceptance coverage: domain/API tests assert preserved completion history and recalculated monthly due state. Browser evidence: `.agent/evidence/HR-005/desktop-routine-edited.png`, `.agent/evidence/HR-005/mobile-routine-edited-390x844.png`, and `.agent/evidence/HR-005/browser-checks.json` show desktop/mobile visible edits, Enter-based save, successful POST/PATCH requests, and no app-originated console errors. Harness audit found no missing supported guardrail or repeated failure pattern. Fresh independent verifier PASS; `npm run validate` passed (22 tests)."
+    },
+    {
+      "id": "HR-006",
+      "title": "Show complete routine history from the routine card",
+      "priority": 6,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["User can expand a routine card to read its immutable completion history", "History is ordered newest first and the no-completion state remains clear", "Desktop and mobile keyboard flows visibly verify expansion without console or network failures"],
+      "notes": "Plan: extend the domain display view with a copy-safe newest-first completion history; render a compact, keyboard-operable show/hide control on each routine card; cover domain/API ordering and UI-visible values; then capture desktop/mobile browser evidence. No dependency added. Completed 2026-08-17: `completionHistory` is domain-derived newest-first while immutable source events remain untouched; cards expose aria-expanded Show/Hide completion history controls. Acceptance coverage: domain regression proves ordering and source immutability; API regression proves returned history. Browser evidence: `.agent/evidence/HR-006/desktop-completion-history.png`, `.agent/evidence/HR-006/mobile-completion-history-390x844.png`, and `.agent/evidence/HR-006/browser-checks.json` show keyboard completion/expansion, visible values, successful POST/GET, and zero console errors. Harness audit added an inline empty favicon to remove the default app-originated 404; recorded in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS: domain ownership, immutability, ARIA control, tests, and browser evidence verified. `npm run validate` passed (22 tests)."
     }
   ]
 }
