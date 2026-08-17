@@ -1,9 +1,9 @@
 {
   "projectStatus": "active",
-  "currentTaskId": "HR-001",
-  "lastValidation": null,
-  "lastVerifierVerdict": null,
+  "currentTaskId": "HR-002",
+  "lastValidation": "2026-08-17: npm run validate passed after remediation (format, typecheck, build, architecture, 3 tests)",
+  "lastVerifierVerdict": "HR-001 PASS: architecture guard and evidence verified",
   "blockers": [],
   "releaseStatus": "not_ready",
-  "completedTasks": []
+  "completedTasks": ["HR-001"]
 }

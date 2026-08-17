@@ -4,19 +4,19 @@
       "id": "HR-001",
       "title": "Establish executable quality harness",
       "priority": 1,
-      "status": "in_progress",
+      "status": "complete",
       "browserValidation": false,
       "acceptanceCriteria": ["Repository exposes validate and status commands", "Controller state and logs are persisted", "A boundary check rejects UI/server imports from domain"],
-      "notes": "Plan: scaffold the executable TypeScript harness, prove the quality gate, then commit it before the first product slice."
+      "notes": "Plan: scaffold the executable TypeScript harness, prove the quality gate, then commit it before the first product slice. Verifier findings (2026-08-17): initial checker accepted an empty/missing domain directory and had no negative proof. Remediated with an actual domain module, explicit web/server/storage import detection, and temporary-fixture rejection tests. Post-remediation evidence: npm run validate passed on 2026-08-17 (format, typecheck, build, architecture check, 3 tests). Final verifier PASS after atomic state update. Independent verifier sandbox could not write dist/index.js (TS5033); that environment limitation was not reproduced by the controller validation."
     },
     {
       "id": "HR-002",
       "title": "Create routines with deterministic scheduling",
       "priority": 2,
-      "status": "pending",
+      "status": "in_progress",
       "browserValidation": true,
       "acceptanceCriteria": ["User can create a routine", "Daily, weekly, monthly and interval schedules calculate next due dates", "Calendar edge cases are tested"],
-      "notes": ""
+      "notes": "Plan: define pure routine scheduling in src/domain, test calendar rules, then add the first HTTP and browser-visible creation flow."
     }
   ]
 }
