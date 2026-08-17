@@ -53,6 +53,9 @@ export function assertRoutine(routine: Routine): void {
   if (!routine.id || !routine.name.trim() || !routine.area.trim()) throw new Error("Routine needs an id, name, and area");
   asDate(routine.createdOn);
   routine.completions.forEach(asDate);
+  if (!(["daily", "weekly", "monthly", "interval"] as string[]).includes(routine.schedule.kind)) {
+    throw new Error("Routine schedule must be daily, weekly, monthly, or interval");
+  }
   if (routine.schedule.kind === "interval" && (!Number.isInteger(routine.schedule.days) || routine.schedule.days < 1)) {
     throw new Error("Custom interval must be a positive whole number of days");
   }

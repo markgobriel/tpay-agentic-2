@@ -6,6 +6,8 @@ const page = readFileSync("src/web/index.html", "utf8");
 const routines = [];
 const send = (response, status, body, type = "application/json") => response.writeHead(status, { "content-type": type }).end(type === "application/json" ? JSON.stringify(body) : body);
 
+const port = Number(process.env.PORT ?? 4173);
+
 createServer(async (request, response) => {
   if (request.method === "GET" && request.url === "/") return send(response, 200, page, "text/html; charset=utf-8");
   if (request.method === "GET" && request.url === "/api/routines") return send(response, 200, routines);
@@ -22,4 +24,4 @@ createServer(async (request, response) => {
     } catch (error) { return send(response, 400, { error: error instanceof Error ? error.message : "Invalid routine" }); }
   }
   return send(response, 404, { error: "Not found" });
-}).listen(4173, () => console.log("Home Rhythm preview: http://localhost:4173"));
+}).listen(port, () => console.log(`Home Rhythm preview: http://localhost:${port}`));

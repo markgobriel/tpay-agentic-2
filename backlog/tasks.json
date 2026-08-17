@@ -16,7 +16,7 @@
       "status": "in_progress",
       "browserValidation": true,
       "acceptanceCriteria": ["User can create a routine", "Daily, weekly, monthly and interval schedules calculate next due dates", "Calendar edge cases are tested"],
-      "notes": "Plan: define pure routine scheduling in src/domain, test calendar rules, then add the first HTTP and browser-visible creation flow. Domain slice complete: daily, weekly, monthly, and positive intervals; immutable completion; pause status; end-of-month and leap-year tests. Evidence: npm run validate passed on 2026-08-17 (7 tests). Remaining: create/storage boundary and browser evidence."
+      "notes": "Plan: define pure routine scheduling in src/domain, test calendar rules, then add the first HTTP and browser-visible creation flow. Domain slice complete: daily, weekly, monthly, and positive intervals; immutable completion; pause status; end-of-month and leap-year tests. Browser preview accepts a routine and displays its domain-calculated next due date. API contract tests cover successful creation and rejected invalid or unsupported schedules. Verifier found the runtime schedule-discriminant gap; remediation is in progress. Pending: post-remediation validation, responsive browser evidence, harness audit, verifier, and atomic completion record."
     }
   ]
 }
