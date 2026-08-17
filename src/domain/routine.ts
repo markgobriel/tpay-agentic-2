@@ -14,6 +14,8 @@ export type Routine = {
   completions: readonly string[];
 };
 
+export type RoutineDetails = Pick<Routine, "name" | "area" | "schedule">;
+
 export type DueStatus = "paused" | "due" | "upcoming";
 
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
@@ -89,6 +91,13 @@ export function completeRoutine(routine: Routine, completedOn: string): Routine 
 export function setRoutineActive(routine: Routine, active: boolean): Routine {
   assertRoutine(routine);
   return { ...routine, active };
+}
+
+export function updateRoutineDetails(routine: Routine, details: RoutineDetails): Routine {
+  assertRoutine(routine);
+  const updated = { ...routine, ...details };
+  assertRoutine(updated);
+  return updated;
 }
 
 export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; latestCompletion: string | null } {

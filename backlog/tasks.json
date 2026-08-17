@@ -35,6 +35,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["A due routine can be marked complete from Today", "Completion is recorded against the boundary's local date and changes the displayed next due date", "The latest completion is visible in the routine's history context"],
       "notes": "Plan: expose the existing domain completion rule through a narrow completion endpoint, add a clear complete action and latest-completion context to the Today card, cover domain/API regression behavior, then capture desktop/mobile keyboard and request evidence. No dependency added. Completed 2026-08-17: `POST /api/routines/:id/completions` supplies the application-boundary local date to the domain, the Today card offers Mark complete only for due routines, and the returned domain view shows next due plus latest completion. Acceptance coverage: domain history context and API completion test assert the boundary date, next-day recalculation, and changed prior due date. Browser evidence: `.agent/evidence/HR-004/desktop-completion-history.png`, `.agent/evidence/HR-004/mobile-completion-history-390x844.png`, and `.agent/evidence/HR-004/browser-checks.json` show desktop/mobile visibility, keyboard creation/completion, successful POSTs, and no app-originated console errors or failed requests. Fresh verifier PASS after adding the exact next-due regression assertion; `npm run validate` passed (20 tests)."
+    },
+    {
+      "id": "HR-005",
+      "title": "Edit routine details without rewriting history",
+      "priority": 5,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["User can edit a routine's name, area, and supported schedule from its card", "Editing a schedule recalculates future due state while preserving immutable completion history", "Desktop and mobile keyboard flows visibly confirm the saved edits without console or network failures"],
+      "notes": "Plan: add a domain-owned edit operation that validates replacement details while retaining completions; expose it through a narrow PATCH boundary; add a compact, keyboard-operable edit form to each routine card; cover domain/API preservation and recalculation rules; then capture desktop/mobile browser evidence. No dependency added. Completed 2026-08-17: `updateRoutineDetails` validates replacement name, area, and schedule in the domain while retaining immutable completions; PATCH exposes it, and each card provides an edit form. Acceptance coverage: domain/API tests assert preserved completion history and recalculated monthly due state. Browser evidence: `.agent/evidence/HR-005/desktop-routine-edited.png`, `.agent/evidence/HR-005/mobile-routine-edited-390x844.png`, and `.agent/evidence/HR-005/browser-checks.json` show desktop/mobile visible edits, Enter-based save, successful POST/PATCH requests, and no app-originated console errors. Harness audit found no missing supported guardrail or repeated failure pattern. Fresh independent verifier PASS; `npm run validate` passed (22 tests)."
     }
   ]
 }

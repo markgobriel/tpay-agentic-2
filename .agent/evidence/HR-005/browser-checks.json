@@ -1,0 +1,24 @@
+{
+  "task": "HR-005",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboard": "Save changes activated with Enter",
+    "visible": "Dust bookcase, Living room, monthly, next due 2026-09-17"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "Save changes activated with Enter",
+    "visible": "Dust bookcase, Living room, interval every 5 days"
+  },
+  "network": {
+    "successfulRequests": [
+      "POST /api/routines (201)",
+      "PATCH /api/routines/:id (200)"
+    ],
+    "failedRequests": [],
+    "inspection": "Successful UI updates and HTTP acceptance tests; the browser surface does not expose resource timing entries."
+  },
+  "console": {
+    "appOriginErrors": []
+  }
+}

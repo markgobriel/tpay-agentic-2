@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
-import { completeRoutine, routineView, setRoutineActive } from "../dist/domain/routine.js";
+import { completeRoutine, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
 
 const page = readFileSync("src/web/index.html", "utf8");
 const routines = [];
@@ -35,8 +35,13 @@ createServer(async (request, response) => {
     for await (const chunk of request) raw += chunk;
     try {
       const input = JSON.parse(raw);
-      if (typeof input.active !== "boolean") throw new Error("Routine active state must be true or false");
-      routines[routineIndex] = setRoutineActive(routines[routineIndex], input.active);
+      if (typeof input.active === "boolean") {
+        routines[routineIndex] = setRoutineActive(routines[routineIndex], input.active);
+      } else {
+        if (typeof input.name !== "string" || typeof input.area !== "string") throw new Error("Routine name and area are required");
+        const schedule = input.kind === "interval" ? { kind: "interval", days: Number(input.days) } : { kind: input.kind };
+        routines[routineIndex] = updateRoutineDetails(routines[routineIndex], { name: input.name, area: input.area, schedule });
+      }
       return send(response, 200, view(routines[routineIndex]));
     } catch (error) { return send(response, 400, { error: error instanceof Error ? error.message : "Invalid routine" }); }
   }

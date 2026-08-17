@@ -1,6 +1,7 @@
 {
   "ideas": [
     {"id": "IDEA-001", "title": "Today view groups due, upcoming, and paused routines", "evidence": "Core flow requires a clear next action.", "status": "candidate"},
-    {"id": "IDEA-002", "title": "Completion history explains recent routine follow-through", "evidence": "Core flow requires finding a routine's history.", "status": "promoted"}
+    {"id": "IDEA-002", "title": "Completion history explains recent routine follow-through", "evidence": "Core flow requires finding a routine's history.", "status": "promoted"},
+    {"id": "IDEA-003", "title": "Edit routine details from the routine card", "evidence": "Novice browser-flow audit on 2026-08-17 found that a created routine has no correction path even though schedule editing is an explicit domain rule.", "status": "promoted"}
   ]
 }

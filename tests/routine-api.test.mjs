@@ -64,6 +64,28 @@ test("records a completion against the local boundary date and returns updated h
   assert.notEqual(result.nextDue, dueRoutine.nextDue);
 });
 
+test("edits routine details through the HTTP boundary without rewriting completion history", async () => {
+  const created = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Dust shelf", area: "Study", kind: "daily", createdOn: "2026-01-30" })
+  }).then((response) => response.json());
+  const completed = await fetch(`http://localhost:${port}/api/routines/${created.id}/completions`, { method: "POST" }).then((response) => response.json());
+  const editedResponse = await fetch(`http://localhost:${port}/api/routines/${created.id}`, {
+    method: "PATCH", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Dust bookcase", area: "Living room", kind: "monthly" })
+  });
+  assert.equal(editedResponse.status, 200);
+  const edited = await editedResponse.json();
+  assert.equal(edited.name, "Dust bookcase");
+  assert.equal(edited.area, "Living room");
+  assert.deepEqual(edited.completions, completed.completions);
+  assert.equal(edited.schedule.kind, "monthly");
+  const completedOn = completed.completions[0];
+  const expected = new Date(`${completedOn}T00:00:00.000Z`);
+  expected.setUTCMonth(expected.getUTCMonth() + 1);
+  assert.equal(edited.nextDue, expected.toISOString().slice(0, 10));
+});
+
 test("rejects an invalid custom schedule through the HTTP boundary", async () => {
   const response = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },

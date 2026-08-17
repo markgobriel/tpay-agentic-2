@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { completeRoutine, dueStatus, nextDueDate, routineView, setRoutineActive } from "../dist/domain/routine.js";
+import { completeRoutine, dueStatus, nextDueDate, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
 
 const routine = (schedule, overrides = {}) => ({
   id: "kitchen-bin",
@@ -48,4 +48,15 @@ test("includes the latest immutable completion in the display-safe history conte
 test("rejects invalid intervals and paused completion", () => {
   assert.throws(() => nextDueDate(routine({ kind: "interval", days: 0 })), /positive whole number/);
   assert.throws(() => completeRoutine(routine({ kind: "daily" }, { active: false }), "2026-01-31"), /Paused routines/);
+});
+
+test("edits future routine details while preserving immutable completion history", () => {
+  const completed = completeRoutine(routine({ kind: "daily" }), "2026-02-01");
+  const edited = updateRoutineDetails(completed, { name: "Clean fridge", area: "Kitchen", schedule: { kind: "monthly" } });
+  assert.deepEqual(completed.completions, ["2026-02-01"]);
+  assert.deepEqual(edited.completions, ["2026-02-01"]);
+  assert.equal(edited.name, "Clean fridge");
+  assert.equal(edited.area, "Kitchen");
+  assert.equal(routineView(edited, "2026-02-15").nextDue, "2026-03-01");
+  assert.equal(routineView(edited, "2026-02-15").status, "upcoming");
 });
