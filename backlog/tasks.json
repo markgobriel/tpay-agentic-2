@@ -7,16 +7,25 @@
       "status": "complete",
       "browserValidation": false,
       "acceptanceCriteria": ["Repository exposes validate and status commands", "Controller state and logs are persisted", "A boundary check rejects UI/server imports from domain"],
-      "notes": "Plan: scaffold the executable TypeScript harness, prove the quality gate, then commit it before the first product slice. Verifier findings (2026-08-17): initial checker accepted an empty/missing domain directory and had no negative proof. Remediated with an actual domain module, explicit web/server/storage import detection, and temporary-fixture rejection tests. Post-remediation evidence: npm run validate passed on 2026-08-17 (format, typecheck, build, architecture check, 3 tests). Final verifier PASS after atomic state update. Independent verifier sandbox could not write dist/index.js (TS5033); that environment limitation was not reproduced by the controller validation."
+      "notes": "Plan: scaffold the executable TypeScript harness, prove the quality gate, then commit it before the first product slice. Verifier findings (2026-08-17): initial checker accepted an empty/missing domain directory and had no negative proof. Remediated with an actual domain module, explicit web/server/storage import detection, and temporary-fixture rejection tests. Post-remediation evidence: npm run validate passed on 2026-08-17 (format, typecheck, build, architecture check, 3 tests). Final verifier PASS after atomic state update. Independent verifier sandbox could not write dist/index.js (TS5033); that environment limitation was not reproduced by the controller validation. Controller evolution (2026-08-17): replaced the logging stub with a standalone Codex CLI loop, persisted active-state and blocker transitions, a bounded-run option, JSONL events, three-failure safety stop, and controller-state acceptance tests. No dependency added."
     },
     {
       "id": "HR-002",
       "title": "Create routines with deterministic scheduling",
       "priority": 2,
-      "status": "in_progress",
+      "status": "complete",
       "browserValidation": true,
       "acceptanceCriteria": ["User can create a routine", "Daily, weekly, monthly and interval schedules calculate next due dates", "Calendar edge cases are tested"],
-      "notes": "Plan: define pure routine scheduling in src/domain, test calendar rules, then add the first HTTP and browser-visible creation flow. Domain slice complete: daily, weekly, monthly, and positive intervals; immutable completion; pause status; end-of-month and leap-year tests. Browser preview accepts a routine and displays its domain-calculated next due date. API contract tests cover successful creation and rejected invalid or unsupported schedules. Post-remediation validation passed (10 tests). Desktop browser evidence: keyboard field entry plus successful creation of Wipe kitchen counter in Kitchen, displayed next due 2026-08-24, no console errors. Mobile 390x844 DOM check passed; screenshot capture timed out, so screenshot evidence remains pending rather than being claimed. Pending: screenshot retry, harness audit, verifier, and atomic completion record."
+      "notes": "Completed 2026-08-17. Domain slice: daily, weekly, monthly, and positive intervals; immutable completion; pause status; end-of-month and leap-year tests. Browser preview creates routines and displays domain-calculated dates. API tests cover success and invalid/unsupported schedules. Browser evidence: keyboard form navigation plus successful weekly creation of Wipe kitchen counter in Kitchen, displaying next due 2026-08-24, no console errors or failed network requests. Durable post-creation screenshots: `.agent/evidence/HR-002/desktop-routine-created.jpg` (1280x720) and `.agent/evidence/HR-002/mobile-routine-created-390x844.jpg` (390px viewport). Daily schedule correctly hides interval-only control. Harness audit: initial full-page screenshot timeout was retried using standard viewport captures, which succeeded. Fresh verifier PASS; full validation passed (13 tests)."
+    },
+    {
+      "id": "HR-003",
+      "title": "Make Today and Upcoming routines useful",
+      "priority": 3,
+      "status": "in_progress",
+      "browserValidation": true,
+      "acceptanceCriteria": ["Today distinguishes due, upcoming, and paused routines", "User can see at least the next due date and schedule context", "Desktop and mobile hierarchy makes the next action clear"],
+      "notes": "Plan: evolve the single-result preview into a clear, persistent Today and Upcoming routine list, preserving deterministic domain-owned status calculations."
     }
   ]
 }
