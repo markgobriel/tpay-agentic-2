@@ -10,7 +10,7 @@
 
 ## Autonomous loop
 
-While `projectStatus` is `active`, choose the highest-priority unblocked task, record a concise plan in its notes, implement one coherent change, add acceptance tests, run `npm run validate`, capture browser evidence for user-facing work, and request a fresh read-only verifier review. Fix validated findings, rerun checks, atomically update task/state/evidence, commit, then begin the next task.
+While `projectStatus` is `active`, operate as a product team: discover and prioritize opportunities across user value, UI/UX, functionality, flows, accessibility, architecture, quality, and removal of obsolete work. Choose the highest-priority unblocked task, record a concise plan in its notes, implement one coherent change, add acceptance tests, run `npm run validate`, capture browser evidence for user-facing work, and request a fresh read-only verifier review. Fix validated findings, rerun checks, atomically update task/state/evidence, commit, then begin the next task.
 
 Do not weaken or bypass tests. Preserve unrelated changes. Domain calculations belong in `src/domain`, never UI or HTTP handlers. Every new dependency needs a reason in task notes.
 

@@ -5,5 +5,6 @@
   "lastVerifierVerdict": "HR-001 PASS: architecture guard and evidence verified; HR-002 awaits complete user-facing slice",
   "blockers": [],
   "releaseStatus": "not_ready",
+  "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
   "completedTasks": ["HR-001"]
 }
