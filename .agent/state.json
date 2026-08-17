@@ -1,19 +1,20 @@
 {
   "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-17: npm run validate passed for HR-003 completion (format, typecheck, build, architecture, 18 tests).",
+  "lastValidation": "2026-08-17: npm run validate passed for HR-004 completion (format, typecheck, build, architecture, 20 tests).",
   "lastControllerValidation": {
     "result": "passed",
     "recordedAt": "2026-08-17T12:57:32.399Z"
   },
-  "lastVerifierVerdict": "HR-003 PASS: Today and Upcoming grouping, browser evidence, and architecture verified after evidence remediation",
+  "lastVerifierVerdict": "HR-004 PASS: completion endpoint, domain-owned next-due/history view, acceptance tests, and browser evidence verified after next-due assertion remediation",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
   "completedTasks": [
     "HR-001",
     "HR-002",
-    "HR-003"
+    "HR-003",
+    "HR-004"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {

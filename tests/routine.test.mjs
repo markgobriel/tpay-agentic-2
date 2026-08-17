@@ -36,8 +36,13 @@ test("derives due status and keeps completion history immutable", () => {
 
 test("provides a display-safe routine view with domain-owned due state", () => {
   const source = routine({ kind: "weekly" });
-  assert.deepEqual(routineView(source, "2026-02-10"), { ...source, nextDue: "2026-02-06", status: "due" });
+  assert.deepEqual(routineView(source, "2026-02-10"), { ...source, nextDue: "2026-02-06", status: "due", latestCompletion: null });
   assert.equal(routineView(setRoutineActive(source, false), "2026-02-10").status, "paused");
+});
+
+test("includes the latest immutable completion in the display-safe history context", () => {
+  const completed = completeRoutine(routine({ kind: "weekly" }), "2026-02-06");
+  assert.equal(routineView(completed, "2026-02-10").latestCompletion, "2026-02-06");
 });
 
 test("rejects invalid intervals and paused completion", () => {

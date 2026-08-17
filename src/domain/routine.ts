@@ -91,6 +91,11 @@ export function setRoutineActive(routine: Routine, active: boolean): Routine {
   return { ...routine, active };
 }
 
-export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus } {
-  return { ...routine, nextDue: nextDueDate(routine), status: dueStatus(routine, today) };
+export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; latestCompletion: string | null } {
+  return {
+    ...routine,
+    nextDue: nextDueDate(routine),
+    status: dueStatus(routine, today),
+    latestCompletion: routine.completions.length ? latestCompletion(routine) : null
+  };
 }

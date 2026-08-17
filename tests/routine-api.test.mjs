@@ -25,7 +25,7 @@ test("creates a routine through the HTTP boundary with a domain-calculated next 
   assert.deepEqual(await response.json(), {
     id: (await fetch(`http://localhost:${port}/api/routines`).then((r) => r.json()))[0].id,
     name: "Clean fridge shelf", area: "Kitchen", createdOn: "2026-01-30",
-    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due"
+    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due", latestCompletion: null
   });
 });
 
@@ -42,6 +42,26 @@ test("lists domain-derived routine states and lets the boundary pause a routine"
   assert.equal((await paused.json()).status, "paused");
   const routines = await fetch(`http://localhost:${port}/api/routines`).then((response) => response.json());
   assert.equal(routines.find((routine) => routine.id === created.id).status, "paused");
+});
+
+test("records a completion against the local boundary date and returns updated history", async () => {
+  const dueRoutine = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Empty kitchen bin", area: "Kitchen", kind: "daily", createdOn: "2026-01-30" })
+  }).then((response) => response.json());
+  assert.equal(dueRoutine.status, "due");
+  const completed = await fetch(`http://localhost:${port}/api/routines/${dueRoutine.id}/completions`, { method: "POST" });
+  assert.equal(completed.status, 201);
+  const result = await completed.json();
+  const today = new Date();
+  const localDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  const tomorrow = new Date(`${localDate}T00:00:00.000Z`);
+  tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+  assert.deepEqual(result.completions, [localDate]);
+  assert.equal(result.latestCompletion, localDate);
+  assert.equal(result.status, "upcoming");
+  assert.equal(result.nextDue, tomorrow.toISOString().slice(0, 10));
+  assert.notEqual(result.nextDue, dueRoutine.nextDue);
 });
 
 test("rejects an invalid custom schedule through the HTTP boundary", async () => {

@@ -1,6 +1,6 @@
 {
   "ideas": [
     {"id": "IDEA-001", "title": "Today view groups due, upcoming, and paused routines", "evidence": "Core flow requires a clear next action.", "status": "candidate"},
-    {"id": "IDEA-002", "title": "Completion history explains recent routine follow-through", "evidence": "Core flow requires finding a routine's history.", "status": "candidate"}
+    {"id": "IDEA-002", "title": "Completion history explains recent routine follow-through", "evidence": "Core flow requires finding a routine's history.", "status": "promoted"}
   ]
 }

@@ -26,6 +26,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["Today distinguishes due, upcoming, and paused routines", "User can see at least the next due date and schedule context", "Desktop and mobile hierarchy makes the next action clear"],
       "notes": "Plan: replace the single-result preview with a persistent, status-grouped Today and Upcoming list; expose domain-derived status through the HTTP boundary; make paused routines reachable with a focused pause/resume control; prove domain/API behavior and capture desktop/mobile keyboard browser evidence. No dependency added. Completed 2026-08-17: the domain owns display-safe next-due/status views, the API returns them and supports pause/resume, and the UI groups Due now, Upcoming, and Paused routines with schedule context. Acceptance coverage: domain and API tests, including upcoming-before-pause and paused list states. Browser evidence: `.agent/evidence/HR-003/desktop-all-groups-full.png`, `.agent/evidence/HR-003/mobile-all-groups-full-390x844.png`, and `.agent/evidence/HR-003/browser-checks.json` show all groups, keyboard flows, visible values, console inspection, and successful POST/PATCH behavior. Fresh verifier PASS after evidence remediation; `npm run validate` passed (18 tests)."
+    },
+    {
+      "id": "HR-004",
+      "title": "Complete due routines and surface recent history",
+      "priority": 4,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["A due routine can be marked complete from Today", "Completion is recorded against the boundary's local date and changes the displayed next due date", "The latest completion is visible in the routine's history context"],
+      "notes": "Plan: expose the existing domain completion rule through a narrow completion endpoint, add a clear complete action and latest-completion context to the Today card, cover domain/API regression behavior, then capture desktop/mobile keyboard and request evidence. No dependency added. Completed 2026-08-17: `POST /api/routines/:id/completions` supplies the application-boundary local date to the domain, the Today card offers Mark complete only for due routines, and the returned domain view shows next due plus latest completion. Acceptance coverage: domain history context and API completion test assert the boundary date, next-day recalculation, and changed prior due date. Browser evidence: `.agent/evidence/HR-004/desktop-completion-history.png`, `.agent/evidence/HR-004/mobile-completion-history-390x844.png`, and `.agent/evidence/HR-004/browser-checks.json` show desktop/mobile visibility, keyboard creation/completion, successful POSTs, and no app-originated console errors or failed requests. Fresh verifier PASS after adding the exact next-due regression assertion; `npm run validate` passed (20 tests)."
     }
   ]
 }

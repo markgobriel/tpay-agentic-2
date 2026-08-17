@@ -1,0 +1,36 @@
+{
+  "capturedAt": "2026-08-17",
+  "browser": "Brave via connected browser automation",
+  "desktop": {
+    "viewport": "default desktop",
+    "screenshot": "desktop-completion-history.png",
+    "visibleValues": [
+      "Due routine Empty kitchen bin offered Mark complete",
+      "After keyboard Enter, Empty kitchen bin moved to Upcoming",
+      "Next due changed to 2026-08-18",
+      "Last completed 2026-08-17 is visible",
+      "Routine completed. status message is visible"
+    ]
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "screenshot": "mobile-completion-history-390x844.png",
+    "visibleValues": [
+      "Completion history and next due remain visible in the single-column layout"
+    ]
+  },
+  "keyboard": [
+    "Created Water entry plants by sequential keyboard input and Enter on Add routine",
+    "Activated Mark complete with Enter"
+  ],
+  "network": {
+    "browserFlow": ["POST /api/routines returned 201", "POST /api/routines/:id/completions returned 201"],
+    "failedRequests": []
+  },
+  "console": {
+    "applicationErrors": [],
+    "ignoredExternalExtensionMessages": [
+      "Brave extension warnings and asynchronous-listener errors observed; none originated in Home Rhythm application code"
+    ]
+  }
+}
