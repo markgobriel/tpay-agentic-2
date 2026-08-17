@@ -22,10 +22,10 @@
       "id": "HR-003",
       "title": "Make Today and Upcoming routines useful",
       "priority": 3,
-      "status": "in_progress",
+      "status": "complete",
       "browserValidation": true,
       "acceptanceCriteria": ["Today distinguishes due, upcoming, and paused routines", "User can see at least the next due date and schedule context", "Desktop and mobile hierarchy makes the next action clear"],
-      "notes": "Plan: evolve the single-result preview into a clear, persistent Today and Upcoming routine list, preserving deterministic domain-owned status calculations."
+      "notes": "Plan: replace the single-result preview with a persistent, status-grouped Today and Upcoming list; expose domain-derived status through the HTTP boundary; make paused routines reachable with a focused pause/resume control; prove domain/API behavior and capture desktop/mobile keyboard browser evidence. No dependency added. Completed 2026-08-17: the domain owns display-safe next-due/status views, the API returns them and supports pause/resume, and the UI groups Due now, Upcoming, and Paused routines with schedule context. Acceptance coverage: domain and API tests, including upcoming-before-pause and paused list states. Browser evidence: `.agent/evidence/HR-003/desktop-all-groups-full.png`, `.agent/evidence/HR-003/mobile-all-groups-full-390x844.png`, and `.agent/evidence/HR-003/browser-checks.json` show all groups, keyboard flows, visible values, console inspection, and successful POST/PATCH behavior. Fresh verifier PASS after evidence remediation; `npm run validate` passed (18 tests)."
     }
   ]
 }

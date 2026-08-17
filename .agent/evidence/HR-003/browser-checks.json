@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-08-17",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboard": "Created Water basil with labelled form controls using Tab and Enter; activated Pause routine with Enter.",
+    "visibleValues": ["Due now: Empty kitchen bin — Next due 2026-08-11", "Upcoming: Water basil — Next due 2026-08-24", "Paused: Dust hallway shelf — Resume routine"],
+    "screenshot": "desktop-all-groups-full.png"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "Activated Resume routine and then Pause routine with Enter; the final status message was Routine paused.",
+    "visibleValues": ["Due now", "Upcoming", "Paused", "Resume routine"],
+    "screenshot": "mobile-all-groups-full-390x844.png"
+  },
+  "console": "No Home Rhythm application console messages were recorded. Browser-extension warnings/errors were excluded; they originated from chrome-extension sources or its injected listener.",
+  "network": "The real-browser form POST and pause/resume PATCH calls completed successfully, as confirmed by the rendered Routine added., Routine paused., and Routine resumed. status messages. API acceptance tests also cover 201 creation, 200 pause, and list responses."
+}

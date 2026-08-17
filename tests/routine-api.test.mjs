@@ -25,8 +25,23 @@ test("creates a routine through the HTTP boundary with a domain-calculated next 
   assert.deepEqual(await response.json(), {
     id: (await fetch(`http://localhost:${port}/api/routines`).then((r) => r.json()))[0].id,
     name: "Clean fridge shelf", area: "Kitchen", createdOn: "2026-01-30",
-    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28"
+    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due"
   });
+});
+
+test("lists domain-derived routine states and lets the boundary pause a routine", async () => {
+  const created = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Water plants", area: "Living room", kind: "weekly", createdOn: "2099-01-30" })
+  }).then((response) => response.json());
+  assert.equal(created.status, "upcoming");
+  const paused = await fetch(`http://localhost:${port}/api/routines/${created.id}`, {
+    method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ active: false })
+  });
+  assert.equal(paused.status, 200);
+  assert.equal((await paused.json()).status, "paused");
+  const routines = await fetch(`http://localhost:${port}/api/routines`).then((response) => response.json());
+  assert.equal(routines.find((routine) => routine.id === created.id).status, "paused");
 });
 
 test("rejects an invalid custom schedule through the HTTP boundary", async () => {

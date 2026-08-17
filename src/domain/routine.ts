@@ -90,3 +90,7 @@ export function setRoutineActive(routine: Routine, active: boolean): Routine {
   assertRoutine(routine);
   return { ...routine, active };
 }
+
+export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus } {
+  return { ...routine, nextDue: nextDueDate(routine), status: dueStatus(routine, today) };
+}

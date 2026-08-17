@@ -1,14 +1,23 @@
 {
   "projectStatus": "active",
-  "currentTaskId": "HR-003",
-  "lastValidation": "2026-08-17: npm run validate passed for HR-002 completion (format, typecheck, build, architecture, 13 tests)",
-  "lastVerifierVerdict": "HR-002 PASS: routine creation, scheduling, browser evidence, and architecture verified",
+  "currentTaskId": null,
+  "lastValidation": "2026-08-17: npm run validate passed for HR-003 completion (format, typecheck, build, architecture, 18 tests).",
+  "lastControllerValidation": {
+    "result": "passed",
+    "recordedAt": "2026-08-17T12:57:32.399Z"
+  },
+  "lastVerifierVerdict": "HR-003 PASS: Today and Upcoming grouping, browser evidence, and architecture verified after evidence remediation",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
   "completedTasks": [
     "HR-001",
-    "HR-002"
+    "HR-002",
+    "HR-003"
   ],
-  "consecutiveControllerFailures": 0
+  "consecutiveControllerFailures": 0,
+  "lastControllerResume": {
+    "reason": "Cleared the false sandbox-only loopback TCP block after a full controller validation passed 18 tests.",
+    "recordedAt": "2026-08-17T13:00:00.000Z"
+  }
 }

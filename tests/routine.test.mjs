@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { completeRoutine, dueStatus, nextDueDate, setRoutineActive } from "../dist/domain/routine.js";
+import { completeRoutine, dueStatus, nextDueDate, routineView, setRoutineActive } from "../dist/domain/routine.js";
 
 const routine = (schedule, overrides = {}) => ({
   id: "kitchen-bin",
@@ -32,6 +32,12 @@ test("derives due status and keeps completion history immutable", () => {
   assert.deepEqual(completed.completions, ["2026-01-31"]);
   assert.equal(dueStatus(completed, "2026-01-31"), "upcoming");
   assert.equal(dueStatus(setRoutineActive(completed, false), "2026-02-10"), "paused");
+});
+
+test("provides a display-safe routine view with domain-owned due state", () => {
+  const source = routine({ kind: "weekly" });
+  assert.deepEqual(routineView(source, "2026-02-10"), { ...source, nextDue: "2026-02-06", status: "due" });
+  assert.equal(routineView(setRoutineActive(source, false), "2026-02-10").status, "paused");
 });
 
 test("rejects invalid intervals and paused completion", () => {
