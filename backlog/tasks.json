@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "HR-001",
+      "title": "Establish executable quality harness",
+      "priority": 1,
+      "status": "in_progress",
+      "browserValidation": false,
+      "acceptanceCriteria": ["Repository exposes validate and status commands", "Controller state and logs are persisted", "A boundary check rejects UI/server imports from domain"],
+      "notes": "Plan: scaffold the executable TypeScript harness, prove the quality gate, then commit it before the first product slice."
+    },
+    {
+      "id": "HR-002",
+      "title": "Create routines with deterministic scheduling",
+      "priority": 2,
+      "status": "pending",
+      "browserValidation": true,
+      "acceptanceCriteria": ["User can create a routine", "Daily, weekly, monthly and interval schedules calculate next due dates", "Calendar edge cases are tested"],
+      "notes": ""
+    }
+  ]
+}
