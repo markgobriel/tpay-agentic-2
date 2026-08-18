@@ -4,7 +4,7 @@
   "lastValidation": "2026-08-18: npm run validate passed for HR-010 active-routine completion (format, typecheck, build, architecture, 29 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T09:27:00.000Z"
+    "recordedAt": "2026-08-18T09:24:01.523Z"
   },
   "lastVerifierVerdict": "HR-010 PASS: active-only completion control, paused-domain guard, regression coverage, full validation, and desktop/mobile keyboard evidence verified",
   "blockers": [],
