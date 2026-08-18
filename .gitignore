@@ -2,3 +2,5 @@ node_modules/
 dist/
 .agent/logs/*.ndjson
 data/
+.vercel
+.playwright-cli
