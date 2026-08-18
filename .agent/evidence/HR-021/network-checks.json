@@ -1,0 +1,13 @@
+{
+  "task": "HR-021",
+  "date": "2026-08-18",
+  "method": "A transparent local proxy in front of the real local preview recorded the browser's HTTP methods and paths after initial page load.",
+  "desktop": {
+    "cancel": "After opening the edit form, changing its name, and pressing Cancel with Enter, the request log was empty: zero requests and zero PATCH requests.",
+    "laterSave": ["PATCH /api/routines/:id", "GET /api/routines"]
+  },
+  "mobile": {
+    "cancel": "At the 390x844 viewport, after opening the edit form, changing its name, and pressing Cancel with Enter, the request log was empty: zero requests and zero PATCH requests.",
+    "laterSave": ["PATCH /api/routines/:id", "GET /api/routines"]
+  }
+}

@@ -166,11 +166,19 @@ test("renders completion controls for every active card but not paused cards", (
 test("gives every routine-card action an accessible name that identifies its routine", () => {
   const page = readFileSync("src/web/index.html", "utf8");
   assert.match(page, /const actionLabel=\(button,action,item\)=>\{button\.setAttribute\('aria-label',action\+': '\+item\.name\);return button\}/);
-  for (const action of ["Mark complete", "Edit routine", "Remove routine", "Save changes", "Show completion history", "Cancel removal", "Confirm removal"]) {
+  for (const action of ["Mark complete", "Edit routine", "Remove routine", "Save changes", "Cancel editing", "Show completion history", "Cancel removal", "Confirm removal"]) {
     assert.match(page, new RegExp(`actionLabel\\([^,]+,'${action}',item\\)`));
   }
   assert.match(page, /actionLabel\(toggle,toggle\.textContent,item\)/);
   assert.match(page, /actionLabel\(historyButton,historyButton\.textContent,item\)/);
+});
+
+test("lets users cancel an inline edit without saving and returns focus to its trigger", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /const editForm=\(item,trigger\)=>/);
+  assert.match(page, /cancel\.type='button';cancel\.textContent='Cancel';actionLabel\(cancel,'Cancel editing',item\);cancel\.onclick=\(\)=>\{editor\.hidden=true;trigger\.focus\(\)\}/);
+  assert.match(page, /const editor=editForm\(item,edit\);edit\.onclick=\(\)=>\{editor\.hidden=!editor\.hidden/);
+  assert.match(page, /cancel\.onclick=\(\)=>\{editor\.hidden=true;trigger\.focus\(\)\};save\.type='submit'/);
 });
 
 test("renders removal confirmation as a described alert dialog and returns focus to its trigger", () => {

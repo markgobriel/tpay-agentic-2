@@ -1,0 +1,18 @@
+{
+  "task": "HR-021",
+  "date": "2026-08-18",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboard": "Enter opened Edit routine, changed the name, and Enter on Cancel hid the form and returned focus to Edit routine: Check balcony plants. A later keyboard save visibly changed the card to Check balcony planter care.",
+    "visibleValues": "Cancelled changes did not replace the card name; the later saved edit did.",
+    "console": "No Home Rhythm application-code warnings or errors. The connected Brave profile emitted unrelated extension diagnostics only.",
+    "network": "A local transparent evidence proxy recorded zero requests (therefore zero PATCH requests) after the desktop Cancel. The subsequent keyboard save recorded PATCH /api/routines/:id followed by GET /api/routines; see network-checks.json."
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "Enter opened Edit routine, changed the name, and Enter on Cancel hid the form and returned focus to Edit routine: Check balcony planter care. A later Enter on Save changes visibly updated the card to Check balcony planter care mobile.",
+    "visibleValues": "The mobile card retained Check balcony planter care after cancellation, then visibly changed only after the later save.",
+    "console": "No Home Rhythm application-code warnings or errors. The connected Brave profile emitted unrelated extension diagnostics only.",
+    "network": "A local transparent evidence proxy recorded zero requests (therefore zero PATCH requests) after the mobile Cancel. The subsequent keyboard save recorded PATCH /api/routines/:id followed by GET /api/routines; see network-checks.json."
+  }
+}
