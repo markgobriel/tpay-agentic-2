@@ -10,6 +10,15 @@
       "notes": "Plan: keep validation ownership in the domain/API, add a small web-only error-to-field presentation helper shared by creation and edit forms, add focused acceptance coverage, then capture desktop/mobile keyboard error-and-retry evidence. No dependency added. Completed 2026-08-18: creation and edit forms now share validation presentation that clears stale errors, marks and describes the relevant invalid field, and returns keyboard focus to it; domain/API validation ownership is unchanged. Acceptance coverage locks name, area, and interval messages, ARIA wiring, focus, form-local edit status, retry, and stale-error clearing. Browser evidence: `.agent/evidence/HR-019/desktop-edit-validation-error-1280x720.png`, `desktop-successful-retry-1280x720.png`, `mobile-validation-error-390x844.png`, `mobile-successful-retry-390x844.png`, and `browser-checks.json` show desktop/mobile keyboard error recovery, corrected successful retries, visible results, and console/network inspection. Harness audit added the form-local validation safeguard to `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS after evidence remediation; `npm run validate` passed (40 tests)."
     },
     {
+      "id": "HR-020",
+      "title": "Clarify the schedule context of paused routines",
+      "priority": 20,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["Paused routine cards do not call their retained schedule date a next due date", "Paused cards clearly explain that the shown schedule date applies when the routine is resumed, without moving schedule calculation into the UI", "Desktop and mobile keyboard flows visibly verify pause and resume context with clean console and network checks"],
+      "notes": "Plan: keep the domain-owned nextDue value unchanged, introduce a small web presentation helper that gives paused cards accurate schedule wording, add focused UI/API acceptance coverage, capture desktop/mobile keyboard pause-and-resume evidence, validate, audit harness guardrails, and obtain a fresh read-only verifier review. No dependency added. Evidence: novice local-browser audit on 2026-08-18 created and paused a weekly routine; its Paused card still said 'Next due Aug 25, 2026', although the domain rule says a paused routine is not due. Completed 2026-08-18: paused cards now say 'Scheduled for DATE when resumed,' while resumed cards retain 'Next due DATE'; focused acceptance coverage passed and the harness safeguard is recorded in `docs/HARNESS_EVOLUTION.md`. Browser evidence: `.agent/evidence/HR-020/desktop-paused-context-1280x720.png`, `desktop-resumed-context-1280x720.png`, `mobile-paused-context-390x844.png`, `mobile-resumed-context-390x844.png`, and `browser-checks.json` visibly prove desktop/mobile Enter-key pause and resume transitions, exact displayed schedule context, and console/network inspection. Fresh read-only verifier PASS; `npm run validate` passed (41 tests)."
+    },
+    {
       "id": "HR-001",
       "title": "Establish executable quality harness",
       "priority": 1,

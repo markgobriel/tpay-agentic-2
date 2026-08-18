@@ -1,0 +1,20 @@
+{
+  "task": "HR-020",
+  "recordedAt": "2026-08-18T12:24:00.000Z",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboard": "Pressed Enter on the identified Pause routine control, then Enter on Resume routine.",
+    "pausedValue": "Entryway · Weekly · Scheduled for Aug 25, 2026 (2026-08-25) when resumed",
+    "resumedValue": "Entryway · Weekly · Next due Aug 25, 2026 (2026-08-25)",
+    "screenshots": ["desktop-paused-context-1280x720.png", "desktop-resumed-context-1280x720.png", "desktop-paused-schedule-context-1280x720.png"]
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "Pressed Enter on the identified Pause routine control, then Enter on Resume routine.",
+    "resumedValue": "Entryway · Weekly · Next due Aug 25, 2026 (2026-08-25)",
+    "pausedValue": "Entryway · Weekly · Scheduled for Aug 25, 2026 (2026-08-25) when resumed",
+    "screenshots": ["mobile-paused-context-390x844.png", "mobile-resumed-context-390x844.png", "mobile-resumed-schedule-context-390x844.png", "mobile-paused-schedule-context-390x844.png"]
+  },
+  "console": "No application-code diagnostics observed. Diagnostics were extension-injected (including a listener-channel message reported with the local URL).",
+  "network": "Successful local creation and PATCH pause/resume requests were visibly reflected in the UI. Performance resource entries are unavailable in the connected browser evaluation surface."
+}

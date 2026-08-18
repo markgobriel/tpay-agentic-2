@@ -210,8 +210,20 @@ test("renders reader-friendly schedule context on routine cards", () => {
   assert.equal(scheduleContext({ kind: "weekly" }), "Weekly");
   assert.equal(scheduleContext({ kind: "monthly" }), "Monthly");
   assert.equal(scheduleContext({ kind: "interval", days: 3 }), "Every 3 days");
-  assert.match(page, /detail\.textContent=item\.area\+' · '\+scheduleContext\(item\.schedule\)\+' · Next due '\+calendarDateContext\(item\.nextDue\)/);
+  assert.match(page, /detail\.textContent=item\.area\+' · '\+scheduleContext\(item\.schedule\)\+' · '\+scheduleDateContext\(item\)/);
   assert.doesNotMatch(page, /item\.schedule\.kind\+\(item\.schedule\.kind==='interval'/);
+});
+
+test("describes a paused card's retained schedule as applying when resumed", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  const source = page.match(/const scheduleDateContext=(item=>[^;]+);/)?.[1];
+  assert.ok(source);
+  const scheduleDateContext = Function("calendarDateContext", `return (${source})`)((date) => `date:${date}`);
+  assert.equal(scheduleDateContext({ active: true, nextDue: "2026-08-25" }), "Next due date:2026-08-25");
+  assert.equal(scheduleDateContext({ active: false, nextDue: "2026-08-25" }), "Scheduled for date:2026-08-25 when resumed");
+  assert.match(page, /detail\.textContent=item\.area\+' · '\+scheduleContext\(item\.schedule\)\+' · '\+scheduleDateContext\(item\)/);
+  assert.doesNotMatch(page, /item\.status==='paused'.*Next due/);
+  assert.doesNotMatch(readFileSync("src/server/app.mjs", "utf8"), /scheduleDateContext/);
 });
 
 test("renders readable exact calendar dates without putting date calculations in the boundary", () => {
