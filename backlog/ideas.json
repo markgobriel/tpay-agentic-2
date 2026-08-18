@@ -6,5 +6,6 @@
     {"id": "IDEA-004", "title": "Expand routine cards to view the full immutable completion history", "evidence": "Novice core-flow audit on 2026-08-17 found that cards only expose the latest completion even though the product promises completion history and the usability loop requires users to find it.", "status": "promoted"},
     {"id": "IDEA-005", "title": "Keep household routines after the local preview restarts", "evidence": "Core-flow audit on 2026-08-18 found that the current in-memory preview loses every user-authored routine when restarted, which breaks routine follow-through.", "status": "promoted"}
     ,{"id": "IDEA-006", "title": "Use the household local calendar day when creating routines", "evidence": "Novice audit on 2026-08-18 found the creation form derives its date with UTC toISOString(), which can save the previous or next calendar day near midnight.", "status": "promoted"}
+    ,{"id": "IDEA-007", "title": "Avoid empty completion-history expansions", "evidence": "Novice desktop audit on 2026-08-18 created an upcoming routine and found that “Show completion history” opened an empty list despite the card already saying “No completions recorded yet.”", "status": "promoted"}
   ]
 }

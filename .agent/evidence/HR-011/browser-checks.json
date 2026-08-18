@@ -1,0 +1,32 @@
+{
+  "task": "HR-011",
+  "capturedAt": "2026-08-18",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboardFlow": "Created Wipe kitchen counter with keyboard form controls, verified there was no history disclosure before completion, marked it complete with Enter, then expanded the newly available history with Enter. Created Sort entry drawer without a completion; the final desktop screenshot visibly shows both cards.",
+    "visibleValues": [
+      "No completions recorded yet. before completion",
+      "Last completed 2026-08-18",
+      "Completed 2026-08-18",
+      "aria-expanded=true after keyboard expansion"
+    ],
+    "console": "No application-originated errors or warnings. Extension-originated messages were excluded."
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboardFlow": "Created Sort entry drawer through the labelled form and Enter submission, then verified its card has no completion-history disclosure while the completed card retains one.",
+    "visibleValues": [
+      "Sort entry drawer",
+      "No completions recorded yet.",
+      "Wipe kitchen counter",
+      "Show completion history"
+    ],
+    "console": "No application-originated errors or warnings."
+  },
+  "network": "Browser resource performance entries were unavailable in the connected browser surface. Successful rendered POST outcomes were verified by both routine cards and their status messages; no failed application requests were observed.",
+  "screenshots": [
+    "desktop-history-expanded-1280x720.png",
+    "desktop-history-states-1280x720.png",
+    "mobile-history-states-390x844.png"
+  ]
+}

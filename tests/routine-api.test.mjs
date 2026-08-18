@@ -119,6 +119,14 @@ test("renders completion controls for every active card but not paused cards", (
   assert.doesNotMatch(page, /if\(item\.status==='due'\)card\.append\(complete\)/);
 });
 
+test("renders completion history controls only when the card has completion data", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /const historyControls=item\.completionHistory\.length\?\(\(\)=>/);
+  assert.doesNotMatch(page, /const historyControls=item\.completionHistory\.length\?\[\(/);
+  assert.match(page, /card\.append\(badge,title,detail,history,\.\.\.historyControls\)/);
+  assert.match(page, /historyButton\.setAttribute\('aria-controls',historyId\)/);
+});
+
 test("edits routine details through the HTTP boundary without rewriting completion history", async () => {
   const created = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },
