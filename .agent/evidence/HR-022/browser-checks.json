@@ -1,0 +1,18 @@
+{
+  "task": "HR-022",
+  "date": "2026-08-18",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboard": "Enter submitted three routines from the creation form. With focus on Focus on an area, the K key selected Kitchen.",
+    "visibleValues": "The all-areas view visibly showed 3 routines shown. The Kitchen-filtered view visibly showed 2 routines shown in Kitchen alongside only the two Kitchen cards.",
+    "console": "No Home Rhythm application-code warnings or errors. The connected Brave profile emitted unrelated extension diagnostics only.",
+    "network": "Keyboard creation showed Routine added. and refreshed the visible cards/count after each local POST. The browser evaluation surface did not expose Performance resource entries; no failed request or application error was observed."
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "With focus on Focus on an area, the B key selected Bathroom.",
+    "visibleValues": "The filtered mobile view visibly showed 1 routine shown in Bathroom and only Sort bathroom shelf.",
+    "console": "No Home Rhythm application-code warnings or errors. The connected Brave profile emitted unrelated extension diagnostics only.",
+    "network": "The existing locally created routine remained visible after the client-side keyboard filter update. The browser evaluation surface did not expose Performance resource entries; no failed request or application error was observed."
+  }
+}

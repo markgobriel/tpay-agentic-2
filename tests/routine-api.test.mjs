@@ -205,8 +205,22 @@ test("renders an accessible area filter that only narrows fetched routine views"
   assert.match(page, /areas=\[\.\.\.new Set\(items\.map\(item=>item\.area\)\)\]\.sort/);
   assert.match(page, /const selectedArea=areaFilterSelect\.value,areas=/);
   assert.match(page, /areaFilterSelect\.value=areas\.includes\(selectedArea\)\?selectedArea:''/);
-  assert.match(page, /const visibleItems=areaFilterSelect\.value\?items\.filter\(item=>item\.area===areaFilterSelect\.value\):items/);
+  assert.match(page, /const selectedArea=areaFilterSelect\.value,visibleItems=selectedArea\?items\.filter\(item=>item\.area===selectedArea\):items/);
   assert.match(page, /areaFilterSelect\.onchange=\(\)=>render\(routineItems\)/);
+});
+
+test("shows the current Today view count for all, selected, and empty areas", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  const source = page.match(/const visibleCountContext=(\(count,area\)=>[^;]+);/)?.[1];
+  assert.ok(source);
+  const visibleCountContext = Function(`return ${source}`)();
+  assert.equal(visibleCountContext(3, ""), "3 routines shown.");
+  assert.equal(visibleCountContext(1, "Kitchen"), "1 routine shown in Kitchen.");
+  assert.equal(visibleCountContext(0, "Garage"), "0 routines shown in Garage.");
+  assert.match(page, /<p id="viewSummary" class="view-summary" role="status">0 routines shown\.<\/p>/);
+  assert.match(page, /const selectedArea=areaFilterSelect\.value,visibleItems=selectedArea\?items\.filter\(item=>item\.area===selectedArea\):items;viewSummary\.textContent=visibleCountContext\(visibleItems\.length,selectedArea\)/);
+  assert.match(page, /No routines in '\+selectedArea\+'\. Choose All areas to see every routine\./);
+  assert.doesNotMatch(readFileSync("src/server/app.mjs", "utf8"), /visibleCountContext|viewSummary/);
 });
 
 test("renders reader-friendly schedule context on routine cards", () => {

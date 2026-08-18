@@ -1,6 +1,15 @@
 {
   "tasks": [
     {
+      "id": "HR-022",
+      "title": "Show how many routines are in the current Today view",
+      "priority": 22,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["Today visibly states the number of routines currently shown, including after an area is selected", "The count updates when the selected area changes and distinguishes the empty filtered result", "Desktop and mobile keyboard flows visibly verify the count, filtering, and clean console/network behavior"],
+      "notes": "Plan: add a web-presentation-only visible-count summary beside the existing area filter; derive it from the fetched views already selected for rendering, add focused regression coverage, then capture desktop/mobile keyboard evidence. No dependency added. Evidence: novice browser audit on 2026-08-18 found the Focus on an area control changes the routine stream but leaves no concise indication of how many routines are currently in view, making it harder to orient after filtering. Controller execution 2026-08-18: render an always-visible singular/plural count from the client-side filtered views, including zero results, without touching domain or HTTP scheduling behavior. Completed 2026-08-18: Today now states the count from the same client-side views it renders, including all-area, selected-area, singular, and zero-result contexts. Focused acceptance coverage locks those strings, the selected-area filtering boundary, the empty filtered message, and server non-ownership. Browser evidence: `.agent/evidence/HR-022/desktop-filtered-count-1280x720.png`, `mobile-filtered-count-390x844.png`, and `browser-checks.json` show keyboard creation/filtering, visible 3/2/1 counts, and clean application console/network observations. Harness audit found no supported new safeguard beyond the focused regression coverage; existing filter-preservation and browser-evidence guardrails apply. Fresh read-only verifier PASS; `npm run validate` passed (43 tests)."
+    },
+    {
       "id": "HR-019",
       "title": "Make routine-form validation errors actionable",
       "priority": 19,

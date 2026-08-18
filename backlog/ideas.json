@@ -10,5 +10,7 @@
     ,{"id": "IDEA-008", "title": "Focus Today on one household area", "evidence": "Novice browser audit on 2026-08-18 found that routines from different areas appear in one undifferentiated stream, so a household cannot quickly focus on the room currently being tended.", "status": "promoted"}
     ,{"id": "IDEA-009", "title": "Make routine-card actions identify their routine", "evidence": "Novice browser audit on 2026-08-18 created two routines and found every card action announced only its generic verb, so assistive-technology users cannot identify the target routine from the control itself.", "status": "promoted"}
     ,{"id": "IDEA-010", "title": "Make routine-form validation errors actionable", "evidence": "Novice local-browser audit on 2026-08-18 found that whitespace-only routine input reaches the server but only updates a generic status message, without marking or returning keyboard focus to the offending field.", "status": "promoted"}
+    ,{"id": "IDEA-011", "title": "Let users cancel an in-progress routine edit", "evidence": "Novice local-browser audit on 2026-08-18 found that opening an inline routine edit has no cancel path, forcing a user to save a change merely to collapse the form.", "status": "promoted"}
+    ,{"id": "IDEA-012", "title": "Show how many routines are in the current Today view", "evidence": "Novice browser audit on 2026-08-18 found that choosing an area changes the routine stream but provides no concise indication of how many routines are in the current view.", "status": "promoted"}
   ]
 }
