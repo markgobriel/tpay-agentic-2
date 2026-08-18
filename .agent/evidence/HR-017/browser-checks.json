@@ -1,0 +1,20 @@
+{
+  "task": "HR-017",
+  "date": "2026-08-18",
+  "preview": "http://localhost:4175",
+  "desktop": {
+    "viewport": "default desktop",
+    "screenshot": "desktop-readable-dates.png",
+    "keyboardFlow": ["Entered name and area", "Pressed Enter on Add routine", "Pressed Enter on Mark complete", "Pressed Enter on Show completion history"],
+    "visibleValues": ["Next due Aug 19, 2026 (2026-08-19)", "Last completed Aug 18, 2026 (2026-08-18)", "Completed Aug 18, 2026 (2026-08-18)"],
+    "console": "No application-originated errors; one browser-extension error was excluded."
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "screenshot": "mobile-readable-dates-390x844.png",
+    "keyboardFlow": ["Pressed Enter to show completion history", "Pressed Enter to hide it", "Pressed Enter to show it again"],
+    "visibleValues": ["Next due Aug 19, 2026 (2026-08-19)", "Last completed Aug 18, 2026 (2026-08-18)", "Completed Aug 18, 2026 (2026-08-18)"],
+    "console": "No application-originated errors; browser-extension errors were excluded."
+  },
+  "network": "The connected browser surface does not expose performance resource entries. The rendered routine after page load confirms GET /api/routines, and the rendered completion status confirms POST /api/routines and POST /api/routines/:id/completions succeeded."
+}

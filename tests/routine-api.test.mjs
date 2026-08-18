@@ -71,7 +71,7 @@ test("returns domain-owned due context for routines due today and earlier", asyn
   }).then((response) => response.json());
   assert.equal(dueToday.dueContext, "Due today");
   assert.equal(dueEarlier.dueContext, `Due since ${dueEarlier.nextDue}`);
-  assert.match(readFileSync("src/web/index.html", "utf8"), /badge\.textContent=item\.dueContext\?\?labels\[status\]/);
+  assert.match(readFileSync("src/web/index.html", "utf8"), /badge\.textContent=item\.dueContext\?dueContext\(item\.dueContext\):labels\[status\]/);
 });
 
 test("lists domain-derived routine states and lets the boundary pause a routine", async () => {
@@ -189,8 +189,22 @@ test("renders reader-friendly schedule context on routine cards", () => {
   assert.equal(scheduleContext({ kind: "weekly" }), "Weekly");
   assert.equal(scheduleContext({ kind: "monthly" }), "Monthly");
   assert.equal(scheduleContext({ kind: "interval", days: 3 }), "Every 3 days");
-  assert.match(page, /detail\.textContent=item\.area\+' · '\+scheduleContext\(item\.schedule\)\+' · Next due '\+item\.nextDue/);
+  assert.match(page, /detail\.textContent=item\.area\+' · '\+scheduleContext\(item\.schedule\)\+' · Next due '\+calendarDateContext\(item\.nextDue\)/);
   assert.doesNotMatch(page, /item\.schedule\.kind\+\(item\.schedule\.kind==='interval'/);
+});
+
+test("renders readable exact calendar dates without putting date calculations in the boundary", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  const source = page.match(/const calendarDateContext=(date=>[^;]+);/)?.[1];
+  assert.ok(source);
+  assert.match(source, /timeZone:'UTC'/);
+  const calendarDateContext = Function(`return (${source})`)();
+  assert.equal(calendarDateContext("2026-08-18"), "Aug 18, 2026 (2026-08-18)");
+  assert.match(page, /const dueContext=context=>context\.startsWith\('Due since '\)\?'Due since '\+calendarDateContext/);
+  assert.match(page, /Next due '\+calendarDateContext\(item\.nextDue\)/);
+  assert.match(page, /Last completed '\+calendarDateContext\(item\.latestCompletion\)/);
+  assert.match(page, /'Completed '\+calendarDateContext\(date\)/);
+  assert.doesNotMatch(readFileSync("src/server/app.mjs", "utf8"), /Intl\.DateTimeFormat/);
 });
 
 test("resets the interval-only control after routine creation", () => {

@@ -1,12 +1,12 @@
 {
   "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-18: npm run validate passed for HR-016 human-readable schedule context (format, typecheck, build, architecture, 37 tests).",
+  "lastValidation": "2026-08-18: npm run validate passed for HR-017 readable routine date context (format, typecheck, build, architecture, 38 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T11:07:36.143Z"
+    "recordedAt": "2026-08-18T11:14:28Z"
   },
-  "lastVerifierVerdict": "HR-016 PASS: human-readable schedule context, reset visibility safeguard, focused regression coverage, full validation, and desktop/mobile browser evidence verified",
+  "lastVerifierVerdict": "HR-017 PASS: readable exact date context, UTC-format regression safeguard, focused coverage, full validation, and desktop/mobile browser evidence verified",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
@@ -26,7 +26,8 @@
     "HR-013",
     "HR-014",
     "HR-015",
-    "HR-016"
+    "HR-016",
+    "HR-017"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {
