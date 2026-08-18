@@ -8,6 +8,10 @@ The harness is active. Read `AGENTS.md` before changing code. Run `npm run statu
 
 For a readable live summary of the controller, run `npm run activity -- --follow`. Use `npm run activity` once for the most recent plans, changes, and checks.
 
+## Hosted preview
+
+The Vercel deployment runs the same app and API, but its routine storage is in-memory for that serverless instance. Use the local preview for durable household data until a hosted durable repository is provisioned.
+
 ## Product boundary
 
 - Single household; no authentication or third-party accounts

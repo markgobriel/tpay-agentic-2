@@ -2,12 +2,12 @@ import { createServer } from "node:http";
 import { completeRoutine, removeRoutine, routineView, routineViews, setRoutineActive, updateRoutineDetails } from "../../dist/domain/routine.js";
 import { asRoutineRepository } from "../storage/routine-repository.mjs";
 
-export function createRoutineApp({ page, repository, localDate }) {
+export function createRoutineHandler({ page, repository, localDate }) {
   const routines = asRoutineRepository(repository);
   const send = (response, status, body, type = "application/json") => response.writeHead(status, { "content-type": type }).end(type === "application/json" ? JSON.stringify(body) : body);
   const view = (routine) => routineView(routine, localDate());
 
-  return createServer(async (request, response) => {
+  return async (request, response) => {
     if (request.method === "GET" && request.url === "/") return send(response, 200, page, "text/html; charset=utf-8");
     if (request.method === "GET" && request.url === "/api/routines") return send(response, 200, routineViews(routines.list(), localDate()));
     if (request.method === "POST" && request.url === "/api/routines") {
@@ -60,5 +60,9 @@ export function createRoutineApp({ page, repository, localDate }) {
       } catch (error) { return send(response, 400, { error: error instanceof Error ? error.message : "Invalid routine" }); }
     }
     return send(response, 404, { error: "Not found" });
-  });
+  };
+}
+
+export function createRoutineApp(options) {
+  return createServer(createRoutineHandler(options));
 }
