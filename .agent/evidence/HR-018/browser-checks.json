@@ -1,0 +1,21 @@
+{
+  "task": "HR-018",
+  "checkedAt": "2026-08-18",
+  "environment": "Local preview at http://127.0.0.1:4174 using the current source build and an isolated temporary data file.",
+  "desktop": {
+    "viewport": "1280x720",
+    "flow": "Created Clear entry table in Entry, opened Remove routine by keyboard, verified the alert dialog and visible irreversible-warning text, then pressed Enter on Cancel.",
+    "visibleResult": "The dialog was named Remove routine: Clear entry table and displayed Remove Clear entry table from this household? This cannot be undone.",
+    "keyboardResult": "After cancellation, document.activeElement had aria-label Remove routine: Clear entry table and the dialog was closed.",
+    "screenshot": "desktop-removal-confirmation-1280x720.png"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "flow": "Created Check balcony door in Balcony through keyboard input, opened Remove routine with Enter, then pressed Enter on Cancel.",
+    "visibleResult": "The 390px view showed an alert dialog named Remove routine: Check balcony door with the visible irreversible-warning text.",
+    "keyboardResult": "After cancellation, document.activeElement had aria-label Remove routine: Check balcony door and the dialog was closed.",
+    "screenshot": "mobile-removal-confirmation-390x844.png"
+  },
+  "console": "No application-code console errors were observed. The connected browser reported pre-existing extension-injected warnings/errors only, including chrome-extension URLs and an asynchronous listener message.",
+  "network": "Visible Routine added status confirmed successful local POST creation in both flows. Performance resource entries are unavailable in this connected browser surface, so no request-timing list was available."
+}

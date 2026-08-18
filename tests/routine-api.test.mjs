@@ -161,6 +161,15 @@ test("gives every routine-card action an accessible name that identifies its rou
   assert.match(page, /actionLabel\(historyButton,historyButton\.textContent,item\)/);
 });
 
+test("renders removal confirmation as a described alert dialog and returns focus to its trigger", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /confirmation\.setAttribute\('role','alertdialog'\)/);
+  assert.match(page, /confirmation\.setAttribute\('aria-label','Remove routine: '\+item\.name\)/);
+  assert.match(page, /confirmation\.setAttribute\('aria-describedby',promptId\)/);
+  assert.doesNotMatch(page, /confirmation\.setAttribute\('aria-labelledby',promptId\)/);
+  assert.match(page, /confirmation\.onclose=\(\)=>trigger\.focus\(\)/);
+});
+
 test("renders completion history controls only when the card has completion data", () => {
   const page = readFileSync("src/web/index.html", "utf8");
   assert.match(page, /const historyControls=item\.completionHistory\.length\?\(\(\)=>/);
