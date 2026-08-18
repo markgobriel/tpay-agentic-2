@@ -98,6 +98,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["Cards with no completions clearly communicate that state without offering an empty history expansion", "Cards with one or more completions retain a keyboard-operable history expansion with newest-first visible values", "Desktop and mobile browser flows visibly verify both states without console or network failures"],
       "notes": "Plan: render the existing no-completion message without a history toggle, preserve the accessible expandable history control only when completion data exists, add focused UI/API acceptance coverage, and capture desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: cards with no completions now keep the clear static message without an empty disclosure; cards with completions retain the ARIA-linked Show/Hide completion history control. Acceptance coverage rejects a nested controls array and requires controls only for completion data. Browser evidence: `.agent/evidence/HR-011/desktop-history-states-1280x720.png` and `.agent/evidence/HR-011/mobile-history-states-390x844.png` visibly show completed/history and no-completion/no-disclosure cards, while `browser-checks.json` records keyboard, console, and network checks. Harness audit added the conditional-controls regression safeguard in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (30 tests)."
+    },
+    {
+      "id": "HR-012",
+      "title": "Clarify routines that have been due since an earlier date",
+      "priority": 12,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["A routine due on the household's current local date is visibly distinguished from a routine due on an earlier date without urgency language", "The distinction is derived in the domain display view rather than calculated in the HTTP boundary or UI", "Desktop and mobile keyboard flows visibly verify both contexts without app console or network failures"],
+      "notes": "Plan: add a domain-owned, display-safe due-context field; render it beside the established due status without safety or urgency claims; add focused domain/API acceptance coverage and desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: `routineView` derives Due today versus Due since YYYY-MM-DD from its deterministic due date and status; the HTTP boundary only returns the view and cards render that context. Acceptance coverage proves due-today, prior-date, paused, and upcoming contexts. Browser evidence: `.agent/evidence/HR-012/desktop-due-context-1280x720.png`, `.agent/evidence/HR-012/mobile-due-context-390x844.png`, and `browser-checks.json` show legible desktop/mobile values, keyboard focus paths, clean app console, successful GET/201 POST fixtures, and no failed requests. Harness audit found no supported new safeguard beyond the focused regression coverage. Fresh read-only verifier PASS; `npm run validate` passed (31 tests)."
     }
   ]
 }

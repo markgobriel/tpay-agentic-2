@@ -108,11 +108,14 @@ export function removeRoutine(routines: readonly Routine[], routineId: string): 
   return routines.filter(({ id }) => id !== routineId);
 }
 
-export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; latestCompletion: string | null; completionHistory: readonly string[] } {
+export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; dueContext: string | null; latestCompletion: string | null; completionHistory: readonly string[] } {
+  const nextDue = nextDueDate(routine);
+  const status = dueStatus(routine, today);
   return {
     ...routine,
-    nextDue: nextDueDate(routine),
-    status: dueStatus(routine, today),
+    nextDue,
+    status,
+    dueContext: status === "due" ? (nextDue === today ? "Due today" : `Due since ${nextDue}`) : null,
     latestCompletion: routine.completions.length ? latestCompletion(routine) : null,
     completionHistory: [...routine.completions].sort().reverse()
   };

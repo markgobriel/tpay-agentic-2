@@ -1,12 +1,12 @@
 {
   "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-18: npm run validate passed for HR-011 meaningful routine history controls (format, typecheck, build, architecture, 30 tests).",
+  "lastValidation": "2026-08-18: npm run validate passed for HR-012 due-context clarity (format, typecheck, build, architecture, 31 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T12:31:08+03:00"
+    "recordedAt": "2026-08-18T09:39:00.000Z"
   },
-  "lastVerifierVerdict": "HR-011 PASS: meaningful conditional history controls, regression coverage, full validation, and desktop/mobile keyboard evidence verified",
+  "lastVerifierVerdict": "HR-012 PASS: domain-owned due context, regression coverage, full validation, and desktop/mobile keyboard evidence verified",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
@@ -21,7 +21,8 @@
     "HR-008",
     "HR-009",
     "HR-010",
-    "HR-011"
+    "HR-011",
+    "HR-012"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {

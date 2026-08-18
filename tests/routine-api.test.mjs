@@ -51,8 +51,27 @@ test("creates a routine through the HTTP boundary with a domain-calculated next 
   assert.deepEqual(await response.json(), {
     id: (await fetch(`http://localhost:${port}/api/routines`).then((r) => r.json()))[0].id,
     name: "Clean fridge shelf", area: "Kitchen", createdOn: "2026-01-30",
-    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due", latestCompletion: null, completionHistory: []
+    schedule: { kind: "monthly" }, active: true, completions: [], nextDue: "2026-02-28", status: "due", dueContext: "Due since 2026-02-28", latestCompletion: null, completionHistory: []
   });
+});
+
+test("returns domain-owned due context for routines due today and earlier", async () => {
+  const today = new Date();
+  const localDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  const createdOn = new Date(`${localDate}T00:00:00.000Z`);
+  createdOn.setUTCDate(createdOn.getUTCDate() - 1);
+  const dueToday = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Wipe counter", area: "Kitchen", kind: "daily", createdOn: createdOn.toISOString().slice(0, 10) })
+  }).then((response) => response.json());
+  createdOn.setUTCDate(createdOn.getUTCDate() - 1);
+  const dueEarlier = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Sort entry shelf", area: "Entry", kind: "daily", createdOn: createdOn.toISOString().slice(0, 10) })
+  }).then((response) => response.json());
+  assert.equal(dueToday.dueContext, "Due today");
+  assert.equal(dueEarlier.dueContext, `Due since ${dueEarlier.nextDue}`);
+  assert.match(readFileSync("src/web/index.html", "utf8"), /badge\.textContent=item\.dueContext\?\?labels\[status\]/);
 });
 
 test("lists domain-derived routine states and lets the boundary pause a routine", async () => {

@@ -1,0 +1,19 @@
+{
+  "task": "HR-012",
+  "recordedAt": "2026-08-18T09:36:00.000Z",
+  "browser": "Brave extension browser",
+  "desktop": {
+    "viewport": "default desktop (1280x720 capture)",
+    "visibleValues": ["Due today — Wipe kitchen counter", "Due since 2026-08-17 — Sort entry shelf"],
+    "keyboard": "Tab from each Mark complete action moved focus to its Pause routine action.",
+    "screenshot": "desktop-due-context-1280x720.png"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "visibleValues": ["Due today — Wipe kitchen counter", "Due since 2026-08-17 — Sort entry shelf"],
+    "keyboard": "Tab from the second Mark complete action moved focus to its Pause routine action.",
+    "screenshot": "mobile-due-context-390x844.png"
+  },
+  "console": "No console warnings or errors originated from http://localhost:4182; extension-only messages were excluded.",
+  "network": "The local preview GET loaded successfully. Fixture POST requests returned 201; no failed app requests were observed. Browser performance resource entries were unavailable in this browser surface."
+}
