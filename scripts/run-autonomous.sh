@@ -7,18 +7,27 @@ set -euo pipefail
 # integer for a bounded operator run; the default continues until a terminal state.
 max_runs="${HOME_RHYTHM_MAX_AUTONOMOUS_RUNS:-0}"
 retry_limit="${HOME_RHYTHM_CONTROLLER_RETRY_LIMIT:-3}"
-agent_bin="${HOME_RHYTHM_AGENT_BIN:-codex}"
+agent_bin="${HOME_RHYTHM_AGENT_BIN:-}"
+agent_sandbox="${HOME_RHYTHM_AGENT_SANDBOX:-danger-full-access}"
 log_file=".agent/logs/controller.ndjson"
 
-if ! [[ "$max_runs" =~ ^[0-9]+$ ]] || ! [[ "$retry_limit" =~ ^[1-9][0-9]*$ ]]; then
-  echo "HOME_RHYTHM_MAX_AUTONOMOUS_RUNS must be 0 or a positive integer, and HOME_RHYTHM_CONTROLLER_RETRY_LIMIT must be positive." >&2
+if ! [[ "$max_runs" =~ ^[0-9]+$ ]] || ! [[ "$retry_limit" =~ ^[1-9][0-9]*$ ]] || ! [[ "$agent_sandbox" =~ ^(workspace-write|danger-full-access)$ ]]; then
+  echo "Invalid controller configuration. Set a non-negative run cap, a positive retry limit, and HOME_RHYTHM_AGENT_SANDBOX to workspace-write or danger-full-access." >&2
   exit 2
 fi
 
-agent_available=true
-if ! command -v "$agent_bin" >/dev/null 2>&1; then
-  agent_available=false
-  agent_bin=false
+if [[ -z "$agent_bin" ]]; then
+  if command -v codex >/dev/null 2>&1; then
+    agent_bin="codex"
+  elif [[ -x "/Applications/ChatGPT.app/Contents/Resources/codex" ]]; then
+    agent_bin="/Applications/ChatGPT.app/Contents/Resources/codex"
+  else
+    echo "Codex CLI was not found. Install it or set HOME_RHYTHM_AGENT_BIN to its executable path." >&2
+    exit 1
+  fi
+elif ! command -v "$agent_bin" >/dev/null 2>&1 && [[ ! -x "$agent_bin" ]]; then
+  echo "HOME_RHYTHM_AGENT_BIN is not executable: $agent_bin" >&2
+  exit 1
 fi
 
 mkdir -p "$(dirname "$log_file")"
@@ -37,10 +46,7 @@ mark_blocked() {
 prompt="You are the Home Rhythm autonomous product controller worker. Read AGENTS.md and every required contract before doing anything. Inspect .agent/state.json and backlog. If lastControllerValidation is failed, diagnose and repair that validation failure before any product work. While state is active, take exactly one highest-priority unblocked, coherent task. Record a concise plan in its notes, implement it, add acceptance tests, run npm run validate, and for user-facing work capture real-browser desktop and mobile evidence with keyboard and console/network checks. Before completion, audit for guardrails required by docs/HARNESS_EVOLUTION.md and obtain a fresh read-only verifier review using the verifier prompt in AGENTS.md. Fix supported verifier findings, rerun validation, atomically update task, state, and evidence, then commit only your intentional changes. Do not modify unrelated existing work, weaken tests, cross architecture boundaries, or guess at human-only decisions. If blocked under docs/AUTONOMY.md, record exact evidence in .agent/state.json and stop. End after one task or a genuine blocker so this controller can safely reassess persisted state."
 
 run=1
-log_event "controller_started" "max_runs=$max_runs retry_limit=$retry_limit agent=$agent_bin"
-if [[ "$agent_available" != true ]]; then
-  log_event "agent_binary_missing" "Set HOME_RHYTHM_AGENT_BIN to a working Codex executable."
-fi
+log_event "controller_started" "max_runs=$max_runs retry_limit=$retry_limit agent=$agent_bin sandbox=$agent_sandbox"
 while ((max_runs == 0 || run <= max_runs)); do
   status="$(node -p 'JSON.parse(require("fs").readFileSync(".agent/state.json", "utf8")).projectStatus')"
   if [[ "$status" != "active" ]]; then
@@ -51,7 +57,7 @@ while ((max_runs == 0 || run <= max_runs)); do
 
   log_event "agent_run_started" "run=$run"
   set +e
-  "$agent_bin" exec --sandbox workspace-write --approve-for-me --json -C "$PWD" "$prompt" 2>&1 | tee -a "$log_file"
+  "$agent_bin" exec --sandbox "$agent_sandbox" --json -C "$PWD" "$prompt" 2>&1 | tee -a "$log_file"
   agent_exit=${PIPESTATUS[0]}
   set -e
 

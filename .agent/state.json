@@ -4,7 +4,7 @@
   "lastValidation": "2026-08-18: npm run validate passed for HR-007 removal flow (format, typecheck, build, architecture, 25 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T08:17:21.963Z"
+    "recordedAt": "2026-08-18T08:28:39.731Z"
   },
   "lastVerifierVerdict": "HR-007 PASS: domain-owned removal, thin DELETE boundary, native modal confirmation, acceptance tests, and genuine desktop/mobile browser evidence verified",
   "blockers": [

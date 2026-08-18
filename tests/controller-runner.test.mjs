@@ -11,7 +11,7 @@ test("autonomous command invokes the Bash controller and its syntax is valid", (
   execFileSync("bash", ["-n", "scripts/run-autonomous.sh"]);
 });
 
-test("missing CLI reaches the durable blocked state after three controller runs", () => {
+test("missing CLI fails before it can mutate project state", () => {
   const directory = mkdtempSync(join(tmpdir(), "home-rhythm-runner-"));
   mkdirSync(join(directory, "scripts"));
   mkdirSync(join(directory, ".agent"));
@@ -25,6 +25,7 @@ test("missing CLI reaches the durable blocked state after three controller runs"
   });
   assert.equal(result.status, 1);
   const state = JSON.parse(readFileSync(join(directory, ".agent", "state.json"), "utf8"));
-  assert.equal(state.projectStatus, "blocked");
-  assert.equal(state.consecutiveControllerFailures, 3);
+  assert.equal(state.projectStatus, "active");
+  assert.equal(state.consecutiveControllerFailures, undefined);
+  assert.match(result.stderr, /HOME_RHYTHM_AGENT_BIN is not executable/);
 });

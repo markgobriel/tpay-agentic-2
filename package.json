@@ -11,6 +11,7 @@
     "architecture:check": "node scripts/architecture-check.mjs",
     "validate": "npm run format:check && npm run typecheck && npm run build && npm run architecture:check && npm run test",
     "status": "node scripts/status.mjs",
+    "activity": "node scripts/activity.mjs",
     "autonomous": "bash scripts/run-autonomous.sh",
     "dev": "npm run build && node scripts/dev.mjs"
   },

@@ -6,6 +6,8 @@ Home Rhythm is a private household-routine planner. It helps one household keep 
 
 The harness is active. Read `AGENTS.md` before changing code. Run `npm run status` for the current controller state and `npm run validate` before completing a task.
 
+For a readable live summary of the controller, run `npm run activity -- --follow`. Use `npm run activity` once for the most recent plans, changes, and checks.
+
 ## Product boundary
 
 - Single household; no authentication or third-party accounts
