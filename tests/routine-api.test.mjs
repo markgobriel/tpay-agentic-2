@@ -146,6 +146,17 @@ test("renders completion history controls only when the card has completion data
   assert.match(page, /historyButton\.setAttribute\('aria-controls',historyId\)/);
 });
 
+test("renders an accessible area filter that only narrows fetched routine views", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /<label for="areaFilterSelect">Focus on an area<\/label>/);
+  assert.match(page, /<option value="">All areas<\/option>/);
+  assert.match(page, /areas=\[\.\.\.new Set\(items\.map\(item=>item\.area\)\)\]\.sort/);
+  assert.match(page, /const selectedArea=areaFilterSelect\.value,areas=/);
+  assert.match(page, /areaFilterSelect\.value=areas\.includes\(selectedArea\)\?selectedArea:''/);
+  assert.match(page, /const visibleItems=areaFilterSelect\.value\?items\.filter\(item=>item\.area===areaFilterSelect\.value\):items/);
+  assert.match(page, /areaFilterSelect\.onchange=\(\)=>render\(routineItems\)/);
+});
+
 test("edits routine details through the HTTP boundary without rewriting completion history", async () => {
   const created = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },

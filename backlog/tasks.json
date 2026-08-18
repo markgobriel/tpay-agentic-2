@@ -107,6 +107,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["A routine due on the household's current local date is visibly distinguished from a routine due on an earlier date without urgency language", "The distinction is derived in the domain display view rather than calculated in the HTTP boundary or UI", "Desktop and mobile keyboard flows visibly verify both contexts without app console or network failures"],
       "notes": "Plan: add a domain-owned, display-safe due-context field; render it beside the established due status without safety or urgency claims; add focused domain/API acceptance coverage and desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: `routineView` derives Due today versus Due since YYYY-MM-DD from its deterministic due date and status; the HTTP boundary only returns the view and cards render that context. Acceptance coverage proves due-today, prior-date, paused, and upcoming contexts. Browser evidence: `.agent/evidence/HR-012/desktop-due-context-1280x720.png`, `.agent/evidence/HR-012/mobile-due-context-390x844.png`, and `browser-checks.json` show legible desktop/mobile values, keyboard focus paths, clean app console, successful GET/201 POST fixtures, and no failed requests. Harness audit found no supported new safeguard beyond the focused regression coverage. Fresh read-only verifier PASS; `npm run validate` passed (31 tests)."
+    },
+    {
+      "id": "HR-013",
+      "title": "Focus Today on one household area",
+      "priority": 13,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["The Today view offers a clearly labelled all-areas control plus an option for each user-authored area", "Selecting an area visibly retains only that area's due, upcoming, and paused routines without changing their domain-derived context", "Desktop and mobile keyboard flows visibly verify filtering, reset, and clean console/network behavior"],
+      "notes": "Plan: add a compact, labelled client-side area filter above the status groups; retain all fetched views and use the filter only for presentation, so schedules and due state remain domain-owned; add a focused UI regression test and desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: the labelled Focus on an area control offers All areas plus user-authored areas and filters only fetched routine views, leaving all schedule/status calculations domain-owned. A valid selection persists after a refresh; a missing area resets to All areas. Acceptance coverage rejects removal of labels, all-area reset, filtered views, or selection preservation. Browser evidence: `.agent/evidence/HR-013/desktop-kitchen-filter-1280x720.png`, `desktop-all-areas-reset-1280x720.png`, `mobile-balcony-filter-390x844.png`, and `browser-checks.json` show desktop/mobile visible due/upcoming/paused contexts, keyboard action/focus paths, successful GET/POST/PATCH activity, and no application-originated console errors. Harness audit added the selected-area refresh safeguard. Fresh read-only verifier PASS; `npm run validate` passed (32 tests)."
     }
   ]
 }

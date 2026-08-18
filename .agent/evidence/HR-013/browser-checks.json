@@ -1,0 +1,17 @@
+{
+  "task": "HR-013",
+  "desktop": {
+    "viewport": "default desktop",
+    "keyboard": "Pressed Enter on the Kitchen card Pause routine control; the refresh retained Kitchen as the selected area. Then focused the area select, returned to All areas, and pressed Tab.",
+    "visibleValues": ["Kitchen filter retained only Wipe counter (Upcoming) and Empty kitchen bin (Paused)", "Both cards retained their rendered next-due dates", "All areas visibly restored Balcony, Entry, and Kitchen cards across Due now, Upcoming, and Paused"],
+    "screenshots": ["desktop-kitchen-filter-1280x720.png", "desktop-all-areas-reset-1280x720.png"]
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "Tabbed away from the focused area select after choosing Balcony.",
+    "visibleValues": ["Balcony filter retained Review balcony pots (Due today) and Water plants (Upcoming)", "Kitchen and Entry cards were absent"],
+    "screenshot": "mobile-balcony-filter-390x844.png"
+  },
+  "network": "Browser-created routines returned successful POST results, the rendered filtered lists came from successful GET results, and keyboard pausing returned a successful PATCH result with the visible Routine paused status.",
+  "console": "No application-originated console errors. Captured errors were browser-extension messages only, including No resume URL from chrome-extension:// and an asynchronous listener warning from the earlier isolated preview."
+}
