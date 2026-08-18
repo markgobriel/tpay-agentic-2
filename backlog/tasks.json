@@ -53,6 +53,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["User can expand a routine card to read its immutable completion history", "History is ordered newest first and the no-completion state remains clear", "Desktop and mobile keyboard flows visibly verify expansion without console or network failures"],
       "notes": "Plan: extend the domain display view with a copy-safe newest-first completion history; render a compact, keyboard-operable show/hide control on each routine card; cover domain/API ordering and UI-visible values; then capture desktop/mobile browser evidence. No dependency added. Completed 2026-08-17: `completionHistory` is domain-derived newest-first while immutable source events remain untouched; cards expose aria-expanded Show/Hide completion history controls. Acceptance coverage: domain regression proves ordering and source immutability; API regression proves returned history. Browser evidence: `.agent/evidence/HR-006/desktop-completion-history.png`, `.agent/evidence/HR-006/mobile-completion-history-390x844.png`, and `.agent/evidence/HR-006/browser-checks.json` show keyboard completion/expansion, visible values, successful POST/GET, and zero console errors. Harness audit added an inline empty favicon to remove the default app-originated 404; recorded in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS: domain ownership, immutability, ARIA control, tests, and browser evidence verified. `npm run validate` passed (22 tests)."
+    },
+    {
+      "id": "HR-007",
+      "title": "Remove obsolete routines from Today",
+      "priority": 7,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["User can remove an obsolete routine from its card after an explicit confirmation", "Removing a routine removes it from Today and the API list", "Desktop and mobile keyboard flows visibly confirm removal without console or network failures"],
+      "notes": "Plan: add a narrow domain-owned removal operation that preserves immutable input, expose it through a DELETE boundary, add an accessible confirmation flow to each routine card, cover domain/API removal and not-found behavior, then capture desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: the domain removes from a copied routine list, DELETE is a thin boundary with not-found behavior, and cards use a native named modal confirmation that restores trigger focus on Escape/cancel. Acceptance coverage: domain immutability/removal and API list/not-found assertions. Browser evidence: `.agent/evidence/HR-007/desktop-removal-confirmation.png`, `.agent/evidence/HR-007/desktop-removal-complete.png`, `.agent/evidence/HR-007/mobile-removal-confirmation-390x844.png`, `.agent/evidence/HR-007/mobile-removal-complete-390x844.png`, and `browser-checks.json` show genuine desktop/mobile keyboard confirmation/removal, focus restoration, no app errors or network failures, DELETE 204, and refreshed empty list. Harness audit added native-modal focus and prompt-description safeguards in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (25 tests)."
     }
   ]
 }

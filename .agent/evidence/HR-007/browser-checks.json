@@ -1,0 +1,24 @@
+{
+  "task": "HR-007",
+  "previewUrl": "http://localhost:4175/",
+  "desktop": {
+    "viewport": "1280x720",
+    "confirmationScreenshot": "desktop-removal-confirmation.png",
+    "screenshot": "desktop-removal-complete.png",
+    "keyboardFlow": "Focused Remove routine and pressed Enter; Escape closed the real modal and returned focus to Remove routine; Enter reopened it, then Tab and Enter activated Yes, remove routine.",
+    "visibleValue": "The card is gone, the empty Today state is visible, and the status says Routine removed.",
+    "network": "GET / and GET /api/routines returned 200; DELETE /api/routines/:id returned 204; the refreshed GET returned 200."
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "confirmationScreenshot": "mobile-removal-confirmation-390x844.png",
+    "screenshot": "mobile-removal-complete-390x844.png",
+    "keyboardFlow": "Created the disposable routine with keyboard navigation, opened the real modal with Enter, then Tab and Enter confirmed removal.",
+    "visibleValue": "The card is gone, the empty Today state is visible, and the status says Routine removed.",
+    "network": "POST /api/routines returned 201; DELETE /api/routines/:id returned 204; the refreshed GET returned 200."
+  },
+  "console": {
+    "appErrors": [],
+    "networkFailures": []
+  }
+}

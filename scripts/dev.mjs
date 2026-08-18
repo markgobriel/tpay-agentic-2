@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
-import { completeRoutine, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
+import { completeRoutine, removeRoutine, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
 
 const page = readFileSync("src/web/index.html", "utf8");
 const routines = [];
@@ -44,6 +44,13 @@ createServer(async (request, response) => {
       }
       return send(response, 200, view(routines[routineIndex]));
     } catch (error) { return send(response, 400, { error: error instanceof Error ? error.message : "Invalid routine" }); }
+  }
+  if (request.method === "DELETE" && routineMatch) {
+    try {
+      const updatedRoutines = removeRoutine(routines, routineMatch[1]);
+      routines.splice(0, routines.length, ...updatedRoutines);
+      return send(response, 204, null);
+    } catch (error) { return send(response, 404, { error: error instanceof Error ? error.message : "Routine not found" }); }
   }
   const completionMatch = request.url?.match(/^\/api\/routines\/([^/]+)\/completions$/);
   if (request.method === "POST" && completionMatch) {

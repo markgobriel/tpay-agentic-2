@@ -87,6 +87,20 @@ test("edits routine details through the HTTP boundary without rewriting completi
   assert.equal(edited.nextDue, expected.toISOString().slice(0, 10));
 });
 
+test("removes an obsolete routine through the HTTP boundary", async () => {
+  const created = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Old moving checklist", area: "Hall", kind: "weekly", createdOn: "2026-01-30" })
+  }).then((response) => response.json());
+  const removed = await fetch(`http://localhost:${port}/api/routines/${created.id}`, { method: "DELETE" });
+  assert.equal(removed.status, 204);
+  const routines = await fetch(`http://localhost:${port}/api/routines`).then((response) => response.json());
+  assert.equal(routines.some((routine) => routine.id === created.id), false);
+  const missing = await fetch(`http://localhost:${port}/api/routines/${created.id}`, { method: "DELETE" });
+  assert.equal(missing.status, 404);
+  assert.match((await missing.json()).error, /Routine not found/);
+});
+
 test("rejects an invalid custom schedule through the HTTP boundary", async () => {
   const response = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },

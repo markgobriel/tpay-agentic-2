@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { completeRoutine, dueStatus, nextDueDate, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
+import { completeRoutine, dueStatus, nextDueDate, removeRoutine, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
 
 const routine = (schedule, overrides = {}) => ({
   id: "kitchen-bin",
@@ -62,4 +62,12 @@ test("edits future routine details while preserving immutable completion history
   assert.equal(edited.area, "Kitchen");
   assert.equal(routineView(edited, "2026-02-15").nextDue, "2026-03-01");
   assert.equal(routineView(edited, "2026-02-15").status, "upcoming");
+});
+
+test("removes one routine without mutating the household's source list", () => {
+  const source = [routine({ kind: "daily" }), routine({ kind: "weekly" }, { id: "bathroom-mirror", name: "Wipe mirror", area: "Bathroom" })];
+  const remaining = removeRoutine(source, "kitchen-bin");
+  assert.deepEqual(source.map(({ id }) => id), ["kitchen-bin", "bathroom-mirror"]);
+  assert.deepEqual(remaining.map(({ id }) => id), ["bathroom-mirror"]);
+  assert.throws(() => removeRoutine(source, "missing"), /Routine not found/);
 });

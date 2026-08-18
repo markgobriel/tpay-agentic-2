@@ -100,6 +100,14 @@ export function updateRoutineDetails(routine: Routine, details: RoutineDetails):
   return updated;
 }
 
+export function removeRoutine(routines: readonly Routine[], routineId: string): Routine[] {
+  if (!routineId) throw new Error("Routine needs an id");
+  const routine = routines.find(({ id }) => id === routineId);
+  if (!routine) throw new Error("Routine not found");
+  assertRoutine(routine);
+  return routines.filter(({ id }) => id !== routineId);
+}
+
 export function routineView(routine: Routine, today: string): Routine & { nextDue: string; status: DueStatus; latestCompletion: string | null; completionHistory: readonly string[] } {
   return {
     ...routine,
