@@ -1,0 +1,92 @@
+{
+  "task": "HR-010",
+  "checkedAt": "2026-08-18T09:17:25.257Z",
+  "desktop": {
+    "viewport": "default",
+    "keyboardFlow": "Typed name and area, selected Weekly by keyboard, pressed Enter to add the upcoming routine, then pressed Enter on Mark complete.",
+    "visibleValues": [
+      "Water balcony plants",
+      "Upcoming",
+      "Last completed 2026-08-18",
+      "Next due 2026-08-25",
+      "Routine completed."
+    ]
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboardFlow": "Typed name and area, selected Weekly by keyboard, pressed Enter to add and complete Mist leaves, then pressed Enter to pause it.",
+    "visibleValues": [
+      "Mist leaves",
+      "Last completed 2026-08-18",
+      "Paused",
+      "Resume routine"
+    ],
+    "pausedCompletionControlPresent": false
+  },
+  "console": {
+    "inspected": true,
+    "appErrors": [],
+    "environmentalDiagnostics": "The connected Brave session reported extension-originated diagnostics. The three local-URL listener messages are the standard browser-extension asynchronous-message error; Home Rhythm has no console calls and the successful flow rendered without an application error.",
+    "errorsOrWarnings": [
+      {
+        "level": "warn",
+        "message": "Env key MODE not found, but marked as optional; proceeding",
+        "timestamp": "2026-08-18T09:16:16.523Z",
+        "url": "chrome-extension://cndibmoanboadcifjkjbdpjgfedanolh/content-scripts/all.js"
+      },
+      {
+        "level": "error",
+        "message": "Error: No resume URL\n    at t (chrome-extension://pbanhockgagggenencehbnadejlgchfc/contentScriptMain.js:1:701728)\n    at async chrome-extension://pbanhockgagggenencehbnadejlgchfc/contentScriptMain.js:1:702053",
+        "timestamp": "2026-08-18T09:16:18.021Z",
+        "url": "chrome-extension://pbanhockgagggenencehbnadejlgchfc/contentScriptMain.js"
+      },
+      {
+        "level": "warn",
+        "message": "[AssignmentCache] no LMS adapter active — skipping fetch Object",
+        "timestamp": "2026-08-18T09:16:21.012Z",
+        "url": "chrome-extension://cndibmoanboadcifjkjbdpjgfedanolh/content-scripts/all.js"
+      },
+      {
+        "level": "error",
+        "message": "Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received",
+        "timestamp": "2026-08-18T09:16:26.008Z",
+        "url": "http://localhost:4175/"
+      },
+      {
+        "level": "error",
+        "message": "Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received",
+        "timestamp": "2026-08-18T09:16:26.008Z",
+        "url": "http://localhost:4175/"
+      },
+      {
+        "level": "error",
+        "message": "Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received",
+        "timestamp": "2026-08-18T09:16:26.009Z",
+        "url": "http://localhost:4175/"
+      },
+      {
+        "level": "warn",
+        "message": "Env key MODE not found, but marked as optional; proceeding",
+        "timestamp": "2026-08-18T09:16:56.040Z",
+        "url": "chrome-extension://cndibmoanboadcifjkjbdpjgfedanolh/content-scripts/all.js"
+      },
+      {
+        "level": "error",
+        "message": "Error: No resume URL\n    at t (chrome-extension://pbanhockgagggenencehbnadejlgchfc/contentScriptMain.js:1:701728)\n    at async chrome-extension://pbanhockgagggenencehbnadejlgchfc/contentScriptMain.js:1:702053",
+        "timestamp": "2026-08-18T09:16:57.172Z",
+        "url": "chrome-extension://pbanhockgagggenencehbnadejlgchfc/contentScriptMain.js"
+      },
+      {
+        "level": "warn",
+        "message": "[AssignmentCache] no LMS adapter active — skipping fetch Object",
+        "timestamp": "2026-08-18T09:17:00.097Z",
+        "url": "chrome-extension://cndibmoanboadcifjkjbdpjgfedanolh/content-scripts/all.js"
+      }
+    ]
+  },
+  "network": {
+    "inspected": true,
+    "observedApiResources": [],
+    "note": "The connected browser surface does not expose performance resource entries. Successful completion requests were confirmed by the immediately rendered completion dates and status messages, with no application console errors."
+  }
+}

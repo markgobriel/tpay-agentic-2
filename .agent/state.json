@@ -1,12 +1,12 @@
 {
   "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-18: npm run validate passed for HR-009 household-local creation date (format, typecheck, build, architecture, 27 tests).",
+  "lastValidation": "2026-08-18: npm run validate passed for HR-010 active-routine completion (format, typecheck, build, architecture, 29 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T09:04:19Z"
+    "recordedAt": "2026-08-18T09:27:00.000Z"
   },
-  "lastVerifierVerdict": "HR-009 PASS: local-date creation boundary, regression coverage, clean domain ownership, full validation, and desktop/mobile keyboard evidence verified",
+  "lastVerifierVerdict": "HR-010 PASS: active-only completion control, paused-domain guard, regression coverage, full validation, and desktop/mobile keyboard evidence verified",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
@@ -19,11 +19,13 @@
     "HR-006",
     "HR-007",
     "HR-008",
-    "HR-009"
+    "HR-009",
+    "HR-010"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {
     "reason": "Cleared the obsolete HR-007 browser-confirmation blocker after the deletion evidence, verifier PASS, validation, and commit completed.",
     "recordedAt": "2026-08-18T00:00:00.000Z"
-  }
+  },
+  "lastControllerFailureAt": "2026-08-18T09:19:36.102Z"
 }

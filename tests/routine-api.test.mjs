@@ -91,6 +91,34 @@ test("records a completion against the local boundary date and returns updated h
   assert.notEqual(result.nextDue, dueRoutine.nextDue);
 });
 
+test("records an early completion for an upcoming active routine and recalculates its next due date", async () => {
+  const today = new Date();
+  const localDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  const yesterday = new Date(`${localDate}T00:00:00.000Z`);
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  const upcomingRoutine = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Water balcony plants", area: "Balcony", kind: "weekly", createdOn: yesterday.toISOString().slice(0, 10) })
+  }).then((response) => response.json());
+  assert.equal(upcomingRoutine.status, "upcoming");
+  const completedResponse = await fetch(`http://localhost:${port}/api/routines/${upcomingRoutine.id}/completions`, { method: "POST" });
+  assert.equal(completedResponse.status, 201);
+  const completed = await completedResponse.json();
+  const nextWeek = new Date(`${localDate}T00:00:00.000Z`);
+  nextWeek.setUTCDate(nextWeek.getUTCDate() + 7);
+  assert.deepEqual(completed.completions, [localDate]);
+  assert.equal(completed.latestCompletion, localDate);
+  assert.equal(completed.nextDue, nextWeek.toISOString().slice(0, 10));
+  assert.equal(completed.status, "upcoming");
+  assert.notEqual(completed.nextDue, upcomingRoutine.nextDue);
+});
+
+test("renders completion controls for every active card but not paused cards", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /if\(item\.active\)card\.append\(complete\)/);
+  assert.doesNotMatch(page, /if\(item\.status==='due'\)card\.append\(complete\)/);
+});
+
 test("edits routine details through the HTTP boundary without rewriting completion history", async () => {
   const created = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },
