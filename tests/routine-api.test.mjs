@@ -180,6 +180,24 @@ test("renders an accessible area filter that only narrows fetched routine views"
   assert.match(page, /areaFilterSelect\.onchange=\(\)=>render\(routineItems\)/);
 });
 
+test("renders reader-friendly schedule context on routine cards", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  const source = page.match(/const scheduleContext=(schedule=>[^;]+);/)?.[1];
+  assert.ok(source);
+  const scheduleContext = Function(`return (${source})`)();
+  assert.equal(scheduleContext({ kind: "daily" }), "Daily");
+  assert.equal(scheduleContext({ kind: "weekly" }), "Weekly");
+  assert.equal(scheduleContext({ kind: "monthly" }), "Monthly");
+  assert.equal(scheduleContext({ kind: "interval", days: 3 }), "Every 3 days");
+  assert.match(page, /detail\.textContent=item\.area\+' · '\+scheduleContext\(item\.schedule\)\+' · Next due '\+item\.nextDue/);
+  assert.doesNotMatch(page, /item\.schedule\.kind\+\(item\.schedule\.kind==='interval'/);
+});
+
+test("resets the interval-only control after routine creation", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /message\.textContent='Routine added\.';form\.reset\(\);showInterval\(kind,daysLabel,days\);await load\(\)/);
+});
+
 test("edits routine details through the HTTP boundary without rewriting completion history", async () => {
   const created = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },

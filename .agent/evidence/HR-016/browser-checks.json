@@ -1,0 +1,27 @@
+{
+  "task": "HR-016",
+  "checkedAt": "2026-08-18",
+  "preview": "http://localhost:4176",
+  "desktop": {
+    "viewport": "default desktop",
+    "keyboard": "Submitted Daily and interval routines with Enter on Add routine.",
+    "visibleValues": [
+      "Kitchen · Daily · Next due 2026-08-19",
+      "Balcony · Every 3 days · Next due 2026-08-21",
+      "The interval-days field is hidden after reset returns the form to Daily."
+    ],
+    "screenshot": "desktop-schedule-context-1280x720.png"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboard": "Tab from Mark complete on Wipe kitchen counter moved focus to Pause routine: Wipe kitchen counter.",
+    "visibleValues": [
+      "Kitchen · Daily · Next due 2026-08-19",
+      "Balcony · Every 3 days · Next due 2026-08-21",
+      "The interval-days field remains hidden for Daily."
+    ],
+    "screenshot": "mobile-schedule-context-390x844.png"
+  },
+  "console": "No application-originated console warnings or errors. Browser extension warnings/errors were excluded.",
+  "network": "Both creation POST requests returned successfully as shown by the Routine added status and refreshed cards. Performance resource entries were unavailable in the connected browser surface; no failed application request was observed."
+}
