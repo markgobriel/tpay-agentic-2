@@ -120,3 +120,9 @@ export function routineView(routine: Routine, today: string): Routine & { nextDu
     completionHistory: [...routine.completions].sort().reverse()
   };
 }
+
+export function routineViews(routines: readonly Routine[], today: string): ReturnType<typeof routineView>[] {
+  return routines.map((routine) => routineView(routine, today)).sort((left, right) =>
+    left.nextDue.localeCompare(right.nextDue) || left.name.localeCompare(right.name) || left.id.localeCompare(right.id)
+  );
+}

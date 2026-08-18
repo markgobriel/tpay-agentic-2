@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { completeRoutine, removeRoutine, routineView, setRoutineActive, updateRoutineDetails } from "../../dist/domain/routine.js";
+import { completeRoutine, removeRoutine, routineView, routineViews, setRoutineActive, updateRoutineDetails } from "../../dist/domain/routine.js";
 import { asRoutineRepository } from "../storage/routine-repository.mjs";
 
 export function createRoutineApp({ page, repository, localDate }) {
@@ -9,7 +9,7 @@ export function createRoutineApp({ page, repository, localDate }) {
 
   return createServer(async (request, response) => {
     if (request.method === "GET" && request.url === "/") return send(response, 200, page, "text/html; charset=utf-8");
-    if (request.method === "GET" && request.url === "/api/routines") return send(response, 200, routines.list().map(view));
+    if (request.method === "GET" && request.url === "/api/routines") return send(response, 200, routineViews(routines.list(), localDate()));
     if (request.method === "POST" && request.url === "/api/routines") {
       let raw = "";
       for await (const chunk of request) raw += chunk;

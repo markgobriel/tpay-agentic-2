@@ -89,6 +89,19 @@ test("lists domain-derived routine states and lets the boundary pause a routine"
   assert.equal(routines.find((routine) => routine.id === created.id).status, "paused");
 });
 
+test("lists routine views in the domain-derived next-due order", async () => {
+  const create = async (name, createdOn, kind = "daily") => fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name, area: "Order test", kind, createdOn })
+  });
+  await create("Later order check", "2099-01-01", "weekly");
+  await create("Alpha order check", "2026-01-30");
+  await create("Beta order check", "2026-01-30");
+  const listed = await fetch(`http://localhost:${port}/api/routines`).then((response) => response.json());
+  const orderedNames = listed.filter((routine) => routine.area === "Order test").map((routine) => routine.name);
+  assert.deepEqual(orderedNames, ["Alpha order check", "Beta order check", "Later order check"]);
+  assert.match(readFileSync("src/web/index.html", "utf8"), /const render=items=>\{/);
+});
+
 test("records a completion against the local boundary date and returns updated history", async () => {
   const dueRoutine = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST", headers: { "content-type": "application/json" },

@@ -1,0 +1,24 @@
+{
+  "task": "HR-014",
+  "checkedAt": "2026-08-18",
+  "desktop": {
+    "viewport": "1280x720",
+    "visibleRoutineOrder": ["Alpha shelf", "Beta shelf", "Keyboard entry reset", "Later closet check"],
+    "keyboard": "Used the labelled area selector with ArrowDown and Home; the visible ordered cards remained Alpha shelf, Beta shelf, Later closet check.",
+    "screenshot": "desktop-ordered-routines-full-1280x720.png"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "visibleRoutineOrder": ["Alpha shelf", "Beta shelf", "Keyboard entry reset", "Later closet check"],
+    "keyboard": "Tab navigation moved from the routine name to area and schedule controls; Enter on Add routine submitted successfully.",
+    "visibleResult": "Routine added.",
+    "screenshot": "mobile-ordered-routines-390x844.png"
+  },
+  "console": {
+    "applicationOriginatedErrors": []
+  },
+  "network": {
+    "successfulInteraction": "The mobile keyboard submission returned the rendered Routine added. status and refreshed ordered routine cards.",
+    "performanceResourceEntries": "Unavailable in the connected browser evaluation surface; no failed app request was observed."
+  }
+}

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { completeRoutine, dueStatus, nextDueDate, removeRoutine, routineView, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
+import { completeRoutine, dueStatus, nextDueDate, removeRoutine, routineView, routineViews, setRoutineActive, updateRoutineDetails } from "../dist/domain/routine.js";
 
 const routine = (schedule, overrides = {}) => ({
   id: "kitchen-bin",
@@ -41,6 +41,17 @@ test("provides a display-safe routine view with domain-owned due state", () => {
   assert.equal(routineView(setRoutineActive(source, false), "2026-02-10").dueContext, null);
   assert.equal(routineView(source, "2026-02-05").dueContext, null);
   assert.equal(routineView(setRoutineActive(source, false), "2026-02-10").status, "paused");
+});
+
+test("orders copied routine views by next due date, name, then id", () => {
+  const source = [
+    routine({ kind: "weekly" }, { id: "zulu", name: "Zebra shelf", createdOn: "2026-02-01" }),
+    routine({ kind: "daily" }, { id: "beta", name: "Beta shelf", createdOn: "2026-02-01" }),
+    routine({ kind: "daily" }, { id: "alpha", name: "Alpha shelf", createdOn: "2026-02-01" }),
+    routine({ kind: "daily" }, { id: "alpha-2", name: "Alpha shelf", createdOn: "2026-02-01" })
+  ];
+  assert.deepEqual(routineViews(source, "2026-02-10").map(({ id }) => id), ["alpha", "alpha-2", "beta", "zulu"]);
+  assert.deepEqual(source.map(({ id }) => id), ["zulu", "beta", "alpha", "alpha-2"]);
 });
 
 test("includes the latest immutable completion in the display-safe history context", () => {
