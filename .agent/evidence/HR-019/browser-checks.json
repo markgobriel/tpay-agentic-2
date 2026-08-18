@@ -1,0 +1,19 @@
+{
+  "task": "HR-019",
+  "environment": "local preview on port 4176 with isolated temporary routine data",
+  "desktop": {
+    "viewport": "default desktop",
+    "keyboardFlow": "Created Wipe counters with Enter, opened Edit routine by its accessible name, entered whitespace-only name, and submitted Save changes. Corrected a creation form and submitted Sweep porch with Enter.",
+    "visibleResult": "Edit form displayed 'Enter what needs doing.', marked the name field invalid, described it with the edit status message, and returned focus to that field. The corrected retry displayed 'Routine added.' and rendered Sweep porch.",
+    "screenshots": ["desktop-edit-validation-error-1280x720.png", "desktop-successful-retry-1280x720.png"]
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboardFlow": "Entered a whitespace-only creation name, filled the area, and submitted with Enter. Corrected the form and submitted Water herbs with Enter.",
+    "visibleResult": "Creation form displayed 'Enter what needs doing.', marked the name field invalid, described it with the form status message, and returned focus to that field. The corrected retry displayed 'Routine added.' and rendered Water herbs.",
+    "screenshots": ["mobile-validation-error-390x844.png", "mobile-successful-retry-390x844.png"]
+  },
+  "successfulRetry": "Desktop and mobile corrected creation retries completed and rendered their returned routine cards.",
+  "console": "No application-code console errors observed. The connected browser reported known extension-injected asynchronous-listener diagnostics, not application code.",
+  "network": "The connected browser surface does not expose performance resource timings. The successful creation retry visibly rendered the returned routine card; validation paths correctly made no request."
+}

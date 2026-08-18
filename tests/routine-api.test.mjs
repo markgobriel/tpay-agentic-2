@@ -41,6 +41,18 @@ test("uses the browser's local calendar fields instead of a UTC ISO date when cr
   assert.doesNotMatch(page, /createdOn:new Date\(\)\.toISOString\(\)\.slice\(0,10\)/);
 });
 
+test("keeps creation and edit validation errors in the relevant form and returns focus to the invalid field", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /const validateRoutineForm=\(error,fields\)=>\{clearFieldErrors\(fields\);if\(!fields\.name\.value\.trim\(\)\)\{showFieldError\(error,fields\.name,'Enter what needs doing\.'/);
+  assert.match(page, /showFieldError\(error,fields\.area,'Enter where this routine belongs\.'/);
+  assert.match(page, /showFieldError\(error,fields\.days,'Enter a whole number of days greater than zero\.'/);
+  assert.match(page, /field\.setAttribute\('aria-invalid','true'\);field\.setAttribute\('aria-describedby',error\.id\);field\.focus\(\)/);
+  assert.match(page, /error\.id='edit-error-'\+item\.id;error\.setAttribute\('role','status'\)/);
+  assert.match(page, /if\(!validateRoutineForm\(error,fields\)\)return;const response=await fetch\('\/api\/routines\/'\+item\.id/);
+  assert.match(page, /if\(!validateRoutineForm\(message,fields\)\)return;message\.textContent='Adding routine…'/);
+  assert.match(page, /form\.reset\(\);clearFieldErrors\(fields\);showInterval/);
+});
+
 test("creates a routine through the HTTP boundary with a domain-calculated next date", async () => {
   const response = await fetch(`http://localhost:${port}/api/routines`, {
     method: "POST",
@@ -218,7 +230,7 @@ test("renders readable exact calendar dates without putting date calculations in
 
 test("resets the interval-only control after routine creation", () => {
   const page = readFileSync("src/web/index.html", "utf8");
-  assert.match(page, /message\.textContent='Routine added\.';form\.reset\(\);showInterval\(kind,daysLabel,days\);await load\(\)/);
+  assert.match(page, /message\.textContent='Routine added\.';form\.reset\(\);clearFieldErrors\(fields\);showInterval\(kind,daysLabel,days\);await load\(\)/);
 });
 
 test("edits routine details through the HTTP boundary without rewriting completion history", async () => {
