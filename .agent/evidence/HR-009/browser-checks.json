@@ -1,0 +1,21 @@
+{
+  "checkedAt": "2026-08-18",
+  "task": "HR-009",
+  "desktop": {
+    "viewport": "1280x720",
+    "keyboardFlow": "Filled name, area, and schedule fields using labels; tabbed through the form; pressed Enter on Add routine.",
+    "visibleResult": "Check local calendar date was added with Next due 2026-08-19 from local created date 2026-08-18.",
+    "network": "The successful POST /api/routines is evidenced by the rendered routine and Routine added status; no failed app request was observed.",
+    "appConsoleErrors": 0,
+    "screenshot": "desktop-local-date-1280x720.png"
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "keyboardFlow": "Filled name, area, and schedule fields using labels; tabbed through the form; pressed Enter on Add routine.",
+    "visibleResult": "Confirm local date on mobile was added with Next due 2026-08-25 from local created date 2026-08-18.",
+    "network": "The successful POST /api/routines is evidenced by the rendered routine and Routine added status; no failed app request was observed.",
+    "appConsoleErrors": 0,
+    "screenshot": "mobile-local-date-390x844.png"
+  },
+  "notes": "Browser console contained only unrelated extension messages; neither local preview page emitted a warning or error. Browser performance resource entries were unavailable in the connected browser surface, so successful POST results were verified through visible state after each submission."
+}

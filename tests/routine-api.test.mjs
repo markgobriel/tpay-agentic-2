@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdtempSync } from "node:fs";
+import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -30,6 +30,16 @@ test.before(async () => {
 });
 
 test.after(stopServer);
+
+test("uses the browser's local calendar fields instead of a UTC ISO date when creating a routine", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  const source = page.match(/const localCalendarDate=(now=>[^;]+);/)?.[1];
+  assert.ok(source);
+  const localCalendarDate = Function(`return (${source})`)();
+  assert.equal(localCalendarDate({ getFullYear: () => 2026, getMonth: () => 7, getDate: () => 18 }), "2026-08-18");
+  assert.match(page, /createdOn:localCalendarDate\(new Date\(\)\)/);
+  assert.doesNotMatch(page, /createdOn:new Date\(\)\.toISOString\(\)\.slice\(0,10\)/);
+});
 
 test("creates a routine through the HTTP boundary with a domain-calculated next date", async () => {
   const response = await fetch(`http://localhost:${port}/api/routines`, {

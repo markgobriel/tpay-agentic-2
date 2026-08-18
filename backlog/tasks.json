@@ -71,6 +71,15 @@
       "browserValidation": false,
       "acceptanceCriteria": ["Created and updated routines remain available after a server restart", "Completion history and paused state survive the restart unchanged", "Storage is replaceable behind a repository boundary and never leaks into domain calculations"],
       "notes": "Plan: introduce a small local-file routine repository, make the HTTP preview depend on it, prove create/update/completion/pause persistence across a clean server restart, and keep the data path untracked. No dependency added. This backend-only task does not change the browser UI. Completed 2026-08-18: `src/server/app.mjs` accepts a list/replace repository contract, while `scripts/dev.mjs` composes the local-file implementation; validated writes use temporary-file rename and `data/` stays untracked. Acceptance coverage creates, completes, edits, pauses, restarts, and verifies the restored routine state. Evidence: `.agent/evidence/HR-008/validation.json`. Harness audit recorded the atomic-write safeguard in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (26 tests)."
+    },
+    {
+      "id": "HR-009",
+      "title": "Create routines against the household local calendar date",
+      "priority": 9,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["Creating a routine sends the browser's local calendar date rather than a UTC-shifted date", "The created routine visibly retains that local date and has domain-derived due context", "Desktop and mobile keyboard creation flows pass with no app console or network failures"],
+      "notes": "Plan: replace the UTC-based browser creation date with an explicit local-calendar formatter at the application boundary; cover the offset-sensitive request value in an acceptance test; capture desktop/mobile keyboard creation evidence with visible dates and console/network inspection. No dependency added. Completed 2026-08-18: the creation boundary now formats the browser's local year/month/day rather than serializing UTC. Acceptance coverage executes the formatter against an offset-sensitive calendar value and rejects a regression to UTC serialization. Browser evidence: `.agent/evidence/HR-009/desktop-local-date-1280x720.png`, `.agent/evidence/HR-009/mobile-local-date-390x844.png`, and `browser-checks.json` show desktop/mobile keyboard creation, visible domain-derived next due dates, successful POST results, and zero app-originated console errors. Browser performance resource entries were unavailable in the connected browser surface; successful POST results were confirmed by the rendered routine and status message. Harness audit added the local-date safeguard to `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (27 tests)."
     }
   ]
 }
