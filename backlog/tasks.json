@@ -118,6 +118,15 @@
       "notes": "Plan: add a compact, labelled client-side area filter above the status groups; retain all fetched views and use the filter only for presentation, so schedules and due state remain domain-owned; add a focused UI regression test and desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: the labelled Focus on an area control offers All areas plus user-authored areas and filters only fetched routine views, leaving all schedule/status calculations domain-owned. A valid selection persists after a refresh; a missing area resets to All areas. Acceptance coverage rejects removal of labels, all-area reset, filtered views, or selection preservation. Browser evidence: `.agent/evidence/HR-013/desktop-kitchen-filter-1280x720.png`, `desktop-all-areas-reset-1280x720.png`, `mobile-balcony-filter-390x844.png`, and `browser-checks.json` show desktop/mobile visible due/upcoming/paused contexts, keyboard action/focus paths, successful GET/POST/PATCH activity, and no application-originated console errors. Harness audit added the selected-area refresh safeguard. Fresh read-only verifier PASS; `npm run validate` passed (32 tests)."
     },
     {
+      "id": "HR-015",
+      "title": "Make routine-card actions identify their routine",
+      "priority": 15,
+      "status": "complete",
+      "browserValidation": true,
+      "acceptanceCriteria": ["Every routine-card action exposes an accessible name that includes its routine name", "Keyboard users can operate an identified action on desktop and mobile without console or network failures", "The action labels remain attached to their existing routine controls without moving domain scheduling logic into the UI"],
+      "notes": "Plan: give every card action a concise accessible name containing its user-authored routine name, add a focused UI regression test, then capture desktop/mobile keyboard and console/network evidence. No dependency added. Evidence: novice browser audit on 2026-08-18 created two routines and found indistinguishable repeated action names (Mark complete, Pause routine, Edit routine, Remove routine). Completed 2026-08-18: all routine-card controls, including dynamic pause/resume/history, edit save, and removal confirmation actions, expose an accessible action-plus-routine name while retaining visible concise labels. Acceptance coverage: focused UI regression checks every action path. Browser evidence: `.agent/evidence/HR-015/desktop-identified-actions-1280x720.png`, `mobile-identified-actions-390x844.png`, and `browser-checks.json` show two distinct cards, keyboard creation/action, successful GET/POST/PATCH requests, and zero console errors or failed requests. Harness audit added the identified-action safeguard. Fresh read-only verifier PASS; `npm run validate` passed (35 tests)."
+    },
+    {
       "id": "HR-014",
       "title": "Order Today routines by their next scheduled date",
       "priority": 14,

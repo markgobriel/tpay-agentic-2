@@ -8,5 +8,6 @@
     ,{"id": "IDEA-006", "title": "Use the household local calendar day when creating routines", "evidence": "Novice audit on 2026-08-18 found the creation form derives its date with UTC toISOString(), which can save the previous or next calendar day near midnight.", "status": "promoted"}
     ,{"id": "IDEA-007", "title": "Avoid empty completion-history expansions", "evidence": "Novice desktop audit on 2026-08-18 created an upcoming routine and found that “Show completion history” opened an empty list despite the card already saying “No completions recorded yet.”", "status": "promoted"}
     ,{"id": "IDEA-008", "title": "Focus Today on one household area", "evidence": "Novice browser audit on 2026-08-18 found that routines from different areas appear in one undifferentiated stream, so a household cannot quickly focus on the room currently being tended.", "status": "promoted"}
+    ,{"id": "IDEA-009", "title": "Make routine-card actions identify their routine", "evidence": "Novice browser audit on 2026-08-18 created two routines and found every card action announced only its generic verb, so assistive-technology users cannot identify the target routine from the control itself.", "status": "promoted"}
   ]
 }

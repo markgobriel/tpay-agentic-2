@@ -1,12 +1,12 @@
 {
   "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-18: npm run validate passed for HR-014 routine ordering (format, typecheck, build, architecture, 34 tests).",
+  "lastValidation": "2026-08-18: npm run validate passed for HR-015 identified routine-card actions (format, typecheck, build, architecture, 35 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T09:49:02Z"
+    "recordedAt": "2026-08-18T10:27:46Z"
   },
-  "lastVerifierVerdict": "HR-014 PASS: domain-owned non-mutating routine ordering, regression coverage, full validation, and complete desktop/mobile evidence verified",
+  "lastVerifierVerdict": "HR-015 PASS: routine-qualified accessible action names, focused regression coverage, full validation, and desktop/mobile browser evidence verified",
   "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
@@ -24,7 +24,8 @@
     "HR-011",
     "HR-012",
     "HR-013",
-    "HR-014"
+    "HR-014",
+    "HR-015"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {

@@ -151,6 +151,16 @@ test("renders completion controls for every active card but not paused cards", (
   assert.doesNotMatch(page, /if\(item\.status==='due'\)card\.append\(complete\)/);
 });
 
+test("gives every routine-card action an accessible name that identifies its routine", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /const actionLabel=\(button,action,item\)=>\{button\.setAttribute\('aria-label',action\+': '\+item\.name\);return button\}/);
+  for (const action of ["Mark complete", "Edit routine", "Remove routine", "Save changes", "Show completion history", "Cancel removal", "Confirm removal"]) {
+    assert.match(page, new RegExp(`actionLabel\\([^,]+,'${action}',item\\)`));
+  }
+  assert.match(page, /actionLabel\(toggle,toggle\.textContent,item\)/);
+  assert.match(page, /actionLabel\(historyButton,historyButton\.textContent,item\)/);
+});
+
 test("renders completion history controls only when the card has completion data", () => {
   const page = readFileSync("src/web/index.html", "utf8");
   assert.match(page, /const historyControls=item\.completionHistory\.length\?\(\(\)=>/);

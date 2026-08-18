@@ -1,0 +1,39 @@
+{
+  "task": "HR-015",
+  "recordedAt": "2026-08-18T10:25:38Z",
+  "preview": "http://127.0.0.1:4175",
+  "desktop": {
+    "viewport": "1280x720",
+    "screenshot": "desktop-identified-actions-1280x720.png",
+    "visibleValues": [
+      "Mark complete: Water balcony plants",
+      "Pause routine: Water balcony plants",
+      "Edit routine: Wipe kitchen counter",
+      "Remove routine: Wipe kitchen counter"
+    ],
+    "keyboard": "Created Wipe kitchen counter by typing values, tabbing through schedule and submit, then pressing Enter."
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "screenshot": "mobile-identified-actions-390x844.png",
+    "visibleValues": [
+      "Mark complete: Water balcony plants",
+      "Pause routine: Water balcony plants",
+      "Edit routine: Water balcony plants",
+      "Remove routine: Wipe kitchen counter"
+    ],
+    "keyboard": "Activated the identified edit action and submitted its focused form with Enter; the routine updated successfully."
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "network": {
+    "failedRequests": 0,
+    "successful": [
+      "GET /api/routines 200",
+      "POST /api/routines 201 (twice)",
+      "PATCH /api/routines/:id 200"
+    ]
+  }
+}
