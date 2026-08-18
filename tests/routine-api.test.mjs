@@ -1,19 +1,35 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
+import { mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 
 const port = 4174;
 let server;
+const dataFile = join(mkdtempSync(join(tmpdir(), "home-rhythm-routines-")), "routines.json");
 
-test.before(async () => {
-  server = spawn(process.execPath, ["scripts/dev.mjs"], { env: { ...process.env, PORT: String(port) }, stdio: "ignore" });
+async function startServer() {
+  server = spawn(process.execPath, ["scripts/dev.mjs"], { env: { ...process.env, PORT: String(port), HOME_RHYTHM_DATA_FILE: dataFile }, stdio: "ignore" });
   for (let attempt = 0; attempt < 20; attempt += 1) {
     try { await fetch(`http://localhost:${port}/api/routines`); return; } catch { await new Promise((resolve) => setTimeout(resolve, 50)); }
   }
   throw new Error("Preview API did not start");
+}
+
+async function stopServer() {
+  if (!server || server.exitCode !== null) return;
+  await new Promise((resolve) => {
+    server.once("exit", resolve);
+    server.kill();
+  });
+}
+
+test.before(async () => {
+  await startServer();
 });
 
-test.after(() => server.kill());
+test.after(stopServer);
 
 test("creates a routine through the HTTP boundary with a domain-calculated next date", async () => {
   const response = await fetch(`http://localhost:${port}/api/routines`, {
@@ -99,6 +115,32 @@ test("removes an obsolete routine through the HTTP boundary", async () => {
   const missing = await fetch(`http://localhost:${port}/api/routines/${created.id}`, { method: "DELETE" });
   assert.equal(missing.status, 404);
   assert.match((await missing.json()).error, /Routine not found/);
+});
+
+test("keeps completed and paused routines after a server restart", async () => {
+  const created = await fetch(`http://localhost:${port}/api/routines`, {
+    method: "POST", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Change hallway filter", area: "Hall", kind: "monthly", createdOn: "2026-01-30" })
+  }).then((response) => response.json());
+  const completed = await fetch(`http://localhost:${port}/api/routines/${created.id}/completions`, { method: "POST" }).then((response) => response.json());
+  const updated = await fetch(`http://localhost:${port}/api/routines/${created.id}`, {
+    method: "PATCH", headers: { "content-type": "application/json" },
+    body: JSON.stringify({ name: "Replace hallway filter", area: "Entry", kind: "interval", days: 14 })
+  }).then((response) => response.json());
+  const paused = await fetch(`http://localhost:${port}/api/routines/${created.id}`, {
+    method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ active: false })
+  }).then((response) => response.json());
+  await stopServer();
+  await startServer();
+  const restored = (await fetch(`http://localhost:${port}/api/routines`).then((response) => response.json())).find((routine) => routine.id === created.id);
+  assert.deepEqual(restored.completions, completed.completions);
+  assert.deepEqual(restored.completionHistory, completed.completionHistory);
+  assert.equal(restored.name, updated.name);
+  assert.equal(restored.area, updated.area);
+  assert.deepEqual(restored.schedule, updated.schedule);
+  assert.equal(restored.active, false);
+  assert.equal(restored.status, "paused");
+  assert.equal(restored.nextDue, paused.nextDue);
 });
 
 test("rejects an invalid custom schedule through the HTTP boundary", async () => {

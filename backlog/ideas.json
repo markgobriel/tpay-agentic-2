@@ -3,6 +3,7 @@
     {"id": "IDEA-001", "title": "Today view groups due, upcoming, and paused routines", "evidence": "Core flow requires a clear next action.", "status": "candidate"},
     {"id": "IDEA-002", "title": "Completion history explains recent routine follow-through", "evidence": "Core flow requires finding a routine's history.", "status": "promoted"},
     {"id": "IDEA-003", "title": "Edit routine details from the routine card", "evidence": "Novice browser-flow audit on 2026-08-17 found that a created routine has no correction path even though schedule editing is an explicit domain rule.", "status": "promoted"},
-    {"id": "IDEA-004", "title": "Expand routine cards to view the full immutable completion history", "evidence": "Novice core-flow audit on 2026-08-17 found that cards only expose the latest completion even though the product promises completion history and the usability loop requires users to find it.", "status": "promoted"}
+    {"id": "IDEA-004", "title": "Expand routine cards to view the full immutable completion history", "evidence": "Novice core-flow audit on 2026-08-17 found that cards only expose the latest completion even though the product promises completion history and the usability loop requires users to find it.", "status": "promoted"},
+    {"id": "IDEA-005", "title": "Keep household routines after the local preview restarts", "evidence": "Core-flow audit on 2026-08-18 found that the current in-memory preview loses every user-authored routine when restarted, which breaks routine follow-through.", "status": "promoted"}
   ]
 }

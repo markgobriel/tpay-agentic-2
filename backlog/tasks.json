@@ -62,6 +62,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["User can remove an obsolete routine from its card after an explicit confirmation", "Removing a routine removes it from Today and the API list", "Desktop and mobile keyboard flows visibly confirm removal without console or network failures"],
       "notes": "Plan: add a narrow domain-owned removal operation that preserves immutable input, expose it through a DELETE boundary, add an accessible confirmation flow to each routine card, cover domain/API removal and not-found behavior, then capture desktop/mobile keyboard evidence. No dependency added. Completed 2026-08-18: the domain removes from a copied routine list, DELETE is a thin boundary with not-found behavior, and cards use a native named modal confirmation that restores trigger focus on Escape/cancel. Acceptance coverage: domain immutability/removal and API list/not-found assertions. Browser evidence: `.agent/evidence/HR-007/desktop-removal-confirmation.png`, `.agent/evidence/HR-007/desktop-removal-complete.png`, `.agent/evidence/HR-007/mobile-removal-confirmation-390x844.png`, `.agent/evidence/HR-007/mobile-removal-complete-390x844.png`, and `browser-checks.json` show genuine desktop/mobile keyboard confirmation/removal, focus restoration, no app errors or network failures, DELETE 204, and refreshed empty list. Harness audit added native-modal focus and prompt-description safeguards in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (25 tests)."
+    },
+    {
+      "id": "HR-008",
+      "title": "Keep household routines after the local preview restarts",
+      "priority": 8,
+      "status": "complete",
+      "browserValidation": false,
+      "acceptanceCriteria": ["Created and updated routines remain available after a server restart", "Completion history and paused state survive the restart unchanged", "Storage is replaceable behind a repository boundary and never leaks into domain calculations"],
+      "notes": "Plan: introduce a small local-file routine repository, make the HTTP preview depend on it, prove create/update/completion/pause persistence across a clean server restart, and keep the data path untracked. No dependency added. This backend-only task does not change the browser UI. Completed 2026-08-18: `src/server/app.mjs` accepts a list/replace repository contract, while `scripts/dev.mjs` composes the local-file implementation; validated writes use temporary-file rename and `data/` stays untracked. Acceptance coverage creates, completes, edits, pauses, restarts, and verifies the restored routine state. Evidence: `.agent/evidence/HR-008/validation.json`. Harness audit recorded the atomic-write safeguard in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (26 tests)."
     }
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "task": "HR-008",
+  "scope": "Backend-only durability; browser evidence is not applicable.",
+  "acceptance": {
+    "restartPersistence": "tests/routine-api.test.mjs creates a routine, completes it, updates its name, area, and interval schedule, pauses it, stops and restarts the server, then verifies the restored completion history, edited details, schedule, paused status, and next-due value.",
+    "repositoryBoundary": "src/server/app.mjs accepts a repository through src/storage/routine-repository.mjs; scripts/dev.mjs composes the file implementation.",
+    "durableWrite": "src/storage/file-routine-repository.mjs validates routines, writes a temporary file, and renames it into place."
+  },
+  "validation": "npm run validate passed on 2026-08-18: format, typecheck, build, architecture check, and 26 tests.",
+  "verifier": "Fresh read-only verifier PASS after corrections; browser evidence correctly not applicable."
+}

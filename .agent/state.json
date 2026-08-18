@@ -1,20 +1,13 @@
 {
-  "projectStatus": "blocked",
+  "projectStatus": "active",
   "currentTaskId": null,
-  "lastValidation": "2026-08-18: npm run validate passed for HR-007 removal flow (format, typecheck, build, architecture, 25 tests).",
+  "lastValidation": "2026-08-18: npm run validate passed for HR-008 durable routine storage (format, typecheck, build, architecture, 26 tests).",
   "lastControllerValidation": {
     "result": "passed",
-    "recordedAt": "2026-08-18T08:28:39.731Z"
+    "recordedAt": "2026-08-18T09:04:19Z"
   },
-  "lastVerifierVerdict": "HR-007 PASS: domain-owned removal, thin DELETE boundary, native modal confirmation, acceptance tests, and genuine desktop/mobile browser evidence verified",
-  "blockers": [
-    {
-      "taskId": "HR-007",
-      "recordedAt": "2026-08-18T08:17:00.000Z",
-      "reason": "Fresh action-time confirmation is required before the local-browser DELETE of the generated routine Archive moving checklist.",
-      "evidence": "Desktop and 390x844 mobile keyboard flows reached the visible named confirmation dialog; screenshots are in .agent/evidence/HR-007 and app-originated console errors were absent."
-    }
-  ],
+  "lastVerifierVerdict": "HR-008 PASS: restart persistence for created, updated, completed, and paused routines; injected repository boundary; clean domain imports",
+  "blockers": [],
   "releaseStatus": "not_ready",
   "autonomyMandate": "User authorized continuous, evidence-driven ownership of all in-scope product strategy, UI/UX, functionality, flows, and cleanup on 2026-08-17.",
   "completedTasks": [
@@ -24,11 +17,12 @@
     "HR-004",
     "HR-005",
     "HR-006",
-    "HR-007"
+    "HR-007",
+    "HR-008"
   ],
   "consecutiveControllerFailures": 0,
   "lastControllerResume": {
-    "reason": "User authorized the final local-browser deletion of the generated HR-007 test routine and requested the controller restart.",
+    "reason": "Cleared the obsolete HR-007 browser-confirmation blocker after the deletion evidence, verifier PASS, validation, and commit completed.",
     "recordedAt": "2026-08-18T00:00:00.000Z"
   }
 }
