@@ -197,6 +197,15 @@
       "browserValidation": true,
       "acceptanceCriteria": ["The removal confirmation is a modal alert dialog whose visible warning is exposed as its description", "Cancelling returns keyboard focus to the identified removal trigger", "Desktop and mobile keyboard flows visibly verify the warning, cancellation, and clean console/network behavior"],
       "notes": "Plan: repair the removal dialog semantics in the web layer without changing deletion behavior or domain rules; add a focused source-level acceptance regression; capture desktop/mobile keyboard evidence and inspect console/network results. No dependency added. Evidence: current-source novice audit on 2026-08-18 found `removeConfirmation` uses `aria-labelledby` only and does not set `role=alertdialog`, contrary to the existing HR-007 harness safeguard requiring the visible warning as dialog description. Completed 2026-08-18: the native modal now has an alert-dialog role, an action-plus-routine accessible name, and the visible irreversible warning as `aria-describedby`; its established close handler returns focus to the removal trigger. Acceptance coverage rejects regression to `aria-labelledby` and requires the role, name, description, and focus return. Browser evidence: `.agent/evidence/HR-018/desktop-removal-confirmation-1280x720.png`, `mobile-removal-confirmation-390x844.png`, and `browser-checks.json` show desktop/mobile keyboard creation, named alert dialogs, visible warnings, cancellation focus return, and successful local POST status. Browser resource timings are unavailable in the connected surface; observed console diagnostics were extension-injected, with no application-code errors. Harness audit added the enforcement row in `docs/HARNESS_EVOLUTION.md`. Fresh read-only verifier PASS; `npm run validate` passed (39 tests)."
+    },
+    {
+      "id": "HR-023",
+      "title": "Keep keyboard focus oriented after routine actions refresh Today",
+      "priority": 23,
+      "status": "in_progress",
+      "browserValidation": true,
+      "acceptanceCriteria": ["After completing, pausing, resuming, saving, or removing a routine, keyboard focus moves to the visible action result instead of a discarded card control", "The result status has a clear focus target while keeping its existing polite status announcement", "Desktop and mobile keyboard flows visibly verify the focus result and clean console/network behavior"],
+      "notes": "Plan: add a web-only helper that focuses the existing result status after successful routine mutations and list refreshes; preserve form-validation focus and domain/server ownership; add focused regression coverage, then capture desktop/mobile keyboard evidence. No dependency added. Evidence: current-source novice audit on 2026-08-18 found successful card actions call `load()` after their original control is removed and do not restore focus, leaving keyboard users without an oriented next location."
     }
   ]
 }

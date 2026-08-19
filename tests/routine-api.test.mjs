@@ -181,6 +181,17 @@ test("lets users cancel an inline edit without saving and returns focus to its t
   assert.match(page, /cancel\.onclick=\(\)=>\{editor\.hidden=true;trigger\.focus\(\)\};save\.type='submit'/);
 });
 
+test("moves focus to the visible result after a successful routine-card action refreshes Today", () => {
+  const page = readFileSync("src/web/index.html", "utf8");
+  assert.match(page, /<p id="message" role="status" tabindex="-1"><\/p>/);
+  assert.match(page, /const showActionResult=async text=>\{message\.textContent=text;await load\(\);message\.focus\(\)\}/);
+  assert.match(page, /await showActionResult\('Routine updated\.'\)/);
+  assert.match(page, /await showActionResult\('Routine removed\.'\)/);
+  assert.match(page, /await showActionResult\(item\.active\?'Routine paused\.'\:'Routine resumed\.'\)/);
+  assert.match(page, /await showActionResult\('Routine completed\.'\)/);
+  assert.doesNotMatch(readFileSync("src/server/app.mjs", "utf8"), /showActionResult|message\.focus/);
+});
+
 test("renders removal confirmation as a described alert dialog and returns focus to its trigger", () => {
   const page = readFileSync("src/web/index.html", "utf8");
   assert.match(page, /confirmation\.setAttribute\('role','alertdialog'\)/);
