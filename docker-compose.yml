@@ -1,0 +1,49 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.15.3
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:8.15.3
+    command: >
+      apm-server -e
+      -E apm-server.rum.enabled=true
+      -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    ports:
+      - "8200:8200"
+    depends_on:
+      - elasticsearch
+
+  app:
+    build: .
+    ports:
+      - "4173:4173"
+    environment:
+      ELASTIC_APM_SERVER_URL: http://apm-server:8200
+      ELASTIC_APM_SERVICE_NAME: home-rhythm
+      ELASTIC_APM_ENVIRONMENT: docker
+      HOME_RHYTHM_DATA_FILE: /app/data/routines.json
+      PORT: "4173"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - apm-server
+
+volumes:
+  elasticsearch-data:

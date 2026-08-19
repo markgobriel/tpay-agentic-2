@@ -1,3 +1,4 @@
+import "./start-apm.mjs";
 import { readFileSync } from "node:fs";
 import { createRoutineApp } from "../src/server/app.mjs";
 import { FileRoutineRepository } from "../src/storage/file-routine-repository.mjs";

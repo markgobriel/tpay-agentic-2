@@ -13,7 +13,13 @@
     "status": "node scripts/status.mjs",
     "activity": "node scripts/activity.mjs",
     "autonomous": "bash scripts/run-autonomous.sh",
-    "dev": "npm run build && node scripts/dev.mjs"
+    "dev": "npm run build && node scripts/dev.mjs",
+    "observability:up": "docker compose up --build",
+    "observability:stack": "docker compose up elasticsearch kibana apm-server -d",
+    "observability:down": "docker compose down"
+  },
+  "dependencies": {
+    "elastic-apm-node": "^4.11.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

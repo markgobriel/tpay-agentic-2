@@ -18,3 +18,7 @@ The Vercel deployment runs the same app and API, but its routine storage is in-m
 - User-authored rooms and routine tasks
 - Deterministic schedules, a Today view, completion history, and pause/resume
 - No hazardous instructions, emergency guidance, purchases, or external-device control
+
+## Observability trial
+
+Home Rhythm can run with Elastic APM and Docker for local trials. See **[OBSERVABILITY-README.md](OBSERVABILITY-README.md)** for the full setup guide (architecture, env vars, troubleshooting). Quick start on a Docker host: `npm run observability:up`, then open http://localhost:4173 and inspect traces in Kibana at http://localhost:5601.
